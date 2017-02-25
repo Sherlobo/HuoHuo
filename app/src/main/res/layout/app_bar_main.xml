@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="com.yqhok.project_2.MainActivity">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/Red"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:layout_scrollFlags="scroll|enterAlways|snap">
+                    
+                    <FrameLayout
+                        android:id="@+id/title_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/title_menu_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu"/>
+
+                    </FrameLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            app:theme="@style/AppTheme">
+
+                            <ImageView
+                                android:id="@+id/home"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <ImageView
+                                android:id="@+id/order"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <ImageView
+                                android:id="@+id/message"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@mipmap/ic_launcher" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </android.support.v7.widget.Toolbar>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    android:descendantFocusability="blocksDescendants" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
+                    app:srcCompat="@mipmap/ic_launcher"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+</layout>

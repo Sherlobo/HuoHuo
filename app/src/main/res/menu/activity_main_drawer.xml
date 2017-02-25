@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <group>
+            <item
+                android:id="@+id/wallet"
+                android:icon="@mipmap/ic_launcher"
+                android:title="钱包" />
+            <item
+                android:id="@+id/recentlyViewed"
+                android:icon="@mipmap/ic_launcher"
+                android:title="最近浏览" />
+            <item
+                android:id="@+id/recommendFriends"
+                android:icon="@mipmap/ic_launcher"
+                android:title="推荐好友" />
+        </group>
+        <group>
+            <item
+                android:id="@+id/settings"
+                android:icon="@mipmap/ic_launcher"
+                android:title="设置" />
+            <item
+                android:id="@+id/supportCenter"
+                android:icon="@mipmap/ic_launcher"
+                android:title="帮助与反馈" />
+            <item
+                android:id="@+id/aboutUs"
+                android:icon="@mipmap/ic_launcher"
+                android:title="关于我们" />
+        </group>
+    </group>
+
+</menu>
