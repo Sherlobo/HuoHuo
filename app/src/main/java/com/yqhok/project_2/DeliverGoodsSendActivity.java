@@ -8,27 +8,28 @@ import android.view.View;
 import android.widget.Button;
 
 import com.yqhok.project_2.base.BaseActivity;
-import com.yqhok.project_2.databinding.ActivityDeliverGoodsBinding;
+import com.yqhok.project_2.databinding.ActivityDeliverGoodsSendBinding;
+
 
 /**
- * Created by yqhok on 2017-02-24.
+ * Created by yqhok on 2017-02-25.
  */
 
-public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding> implements View.OnClickListener{
+public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsSendBinding> implements View.OnClickListener {
 
     private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_deliver_goods_send);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliver_goods);
         showContentView();
-        setTitle("发货");
+        setTitle("订单");
         initView();
     }
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, DeliverGoodsActivity.class);
+        Intent intent = new Intent(context, DeliverGoodsSendActivity.class);
         context.startActivity(intent);
     }
 
@@ -39,15 +40,15 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
     }
 
     private void initView() {
-        button = (Button) findViewById(R.id.send);
+        button = (Button) findViewById(R.id.send_order);
         button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.send:
-                DeliverGoodsSendActivity.start(DeliverGoodsActivity.this);
+            case R.id.send_order:
+                DeliverGoodsPayActivity.start(DeliverGoodsSendActivity.this);
                 break;
             default:
                 break;

@@ -39,6 +39,18 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
+            android:name=".DeliverGoodsSendActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".DeliverGoodsPayActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".NavPersonalInfoActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
             android:name=".NavQrcodeActivity"
             android:theme="@style/AppTheme" />
         <activity

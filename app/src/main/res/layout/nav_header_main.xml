@@ -5,10 +5,11 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:padding="10dp"
+        android:clickable="true"
         android:background="#FF0000">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/icon_image"
+            android:id="@+id/head_shot"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@android:drawable/sym_def_app_icon"

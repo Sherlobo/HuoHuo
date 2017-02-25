@@ -17,7 +17,8 @@ public class NavWalletActivity extends BaseActivity<ActivityNavWalletBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_wallet);
-
+        showContentView();
+        setTitle("钱包");
     }
 
     public static void start(Context context) {

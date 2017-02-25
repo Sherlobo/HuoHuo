@@ -17,6 +17,8 @@ public class NavRecentlyViewedActivity extends BaseActivity<ActivityNavRecentlyV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_recently_viewed);
+        showContentView();
+        setTitle("最近浏览");
     }
 
     public static void start(Context context) {

@@ -17,6 +17,7 @@ public class NavQrcodeActivity extends BaseActivity<ActivityNavQrcodeBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_qrcode);
+        showContentView();
     }
 
     public static void start(Context context) {

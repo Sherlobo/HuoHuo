@@ -2,6 +2,7 @@ package com.yqhok.project_2;
 
 import android.app.SearchManager;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -22,10 +22,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.yqhok.project_2.databinding.ActivityMainBinding;
 import com.yqhok.project_2.friend.FriendFragment;
 import com.yqhok.project_2.home.HomeFragment;
 import com.yqhok.project_2.order.OrderFragment;
-import com.yqhok.project_2.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private ViewPager vpContent;
     private ImageView titleMenuImage;
+    private ImageView headShot;
 
     private ActivityMainBinding mBinding;
     private ImageView home;
@@ -96,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigationView.inflateMenu(R.menu.activity_main_drawer);
         View headerView = navigationView.getHeaderView(0);
         headerView.setOnClickListener(this);
+        headShot = (ImageView) headerView.findViewById(R.id.head_shot);
+        headShot.setOnClickListener(this);
         navigationView.setOnClickListener(this);
         ImageView qrcode = (ImageView) headerView.findViewById(R.id.qrcode);
         qrcode.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +220,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.fab:
                 DeliverGoodsActivity.start(MainActivity.this);
+                break;
+            case R.id.head_shot:
+                NavPersonalInfoActivity.start(MainActivity.this);
+                break;
             default:
                 break;
         }

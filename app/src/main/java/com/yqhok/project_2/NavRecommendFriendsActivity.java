@@ -17,6 +17,8 @@ public class NavRecommendFriendsActivity extends BaseActivity<ActivityNavRecomme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_recommend_friends);
+        showContentView();
+        setTitle("推荐好友");
     }
 
     public static void start(Context context) {

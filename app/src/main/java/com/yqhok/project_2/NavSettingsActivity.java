@@ -17,6 +17,8 @@ public class NavSettingsActivity extends BaseActivity<ActivityNavSettingsBinding
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_settings);
+        showContentView();
+        setTitle("设置");
     }
 
     public static void start(Context context) {
