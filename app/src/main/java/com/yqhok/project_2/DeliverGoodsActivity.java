@@ -19,9 +19,6 @@ import com.yqhok.project_2.databinding.ActivityDeliverGoodsBinding;
 
 public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding>{
 
-    private CardView cardView;
-    private ActivityDeliverGoodsBinding bindingView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
