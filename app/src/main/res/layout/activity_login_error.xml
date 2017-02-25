@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login_error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title_login_error"/>
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center">
+        
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="你可以通过手机号+短信验证码进行修改密码"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/UseIdentify"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="使用验证码修改"
+            android:textColor="@android:color/white"
+            android:background="#2baf2b"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+
+    </RelativeLayout>
