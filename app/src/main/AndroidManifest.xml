@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.Huohuo.Huohuo.login.LoginActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,56 +20,56 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity">
+            android:name="com.Huohuo.Huohuo.MainActivity">
         </activity>
         <activity
-            android:name=".login.Register"
+            android:name="com.Huohuo.Huohuo.login.Register"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".login.LoginError"
+            android:name="com.Huohuo.Huohuo.login.LoginError"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".base.BaseActivity"
+            android:name="com.Huohuo.Huohuo.base.BaseActivity"
             android:label="BaseActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DeliverGoodsActivity"
+            android:name="com.Huohuo.Huohuo.DeliverGoodsActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".DeliverGoodsSendActivity"
+            android:name="com.Huohuo.Huohuo.DeliverGoodsSendActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".DeliverGoodsPayActivity"
+            android:name="com.Huohuo.Huohuo.DeliverGoodsPayActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".NavPersonalInfoActivity"
+            android:name="com.Huohuo.Huohuo.NavPersonalInfoActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".NavQrcodeActivity"
+            android:name="com.Huohuo.Huohuo.NavQrcodeActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavWalletActivity"
+            android:name="com.Huohuo.Huohuo.NavWalletActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavRecentlyViewedActivity"
+            android:name="com.Huohuo.Huohuo.NavRecentlyViewedActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavRecommendFriendsActivity"
+            android:name="com.Huohuo.Huohuo.NavRecommendFriendsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavSettingsActivity"
+            android:name="com.Huohuo.Huohuo.NavSettingsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavSupportCenterActivity"
+            android:name="com.Huohuo.Huohuo.NavSupportCenterActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavAboutUsActivity"
+            android:name="com.Huohuo.Huohuo.NavAboutUsActivity"
             android:theme="@style/AppTheme" />
     </application>
 
