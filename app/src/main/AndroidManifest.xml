@@ -3,6 +3,7 @@
     package="com.Huohuo.Huohuo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -47,7 +48,7 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.NavPersonalInfoActivity"
+            android:name="com.Huohuo.Huohuo.PersonalInfoActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
@@ -71,6 +72,30 @@
         <activity
             android:name="com.Huohuo.Huohuo.NavAboutUsActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".HomeCommonUsedRouteActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".HomeCommonUsedDriverActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".HomeCommonUsedTruckActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".AddNewRouteActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".AddNewDriverActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".AddNewTruckActivity"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

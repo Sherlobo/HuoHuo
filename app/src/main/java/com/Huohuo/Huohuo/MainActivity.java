@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DeliverGoodsActivity.start(MainActivity.this);
                 break;
             case R.id.head_shot:
-                NavPersonalInfoActivity.start(MainActivity.this);
+                PersonalInfoActivity.start(MainActivity.this);
                 break;
             default:
                 break;
