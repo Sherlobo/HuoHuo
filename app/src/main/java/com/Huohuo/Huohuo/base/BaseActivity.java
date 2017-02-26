@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityBaseBinding;
+import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.databinding.ActivityBaseBinding;
+
 
 /**
  * Created by yqhok on 2017-02-24.

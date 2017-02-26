@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.Huohuo.Huohuo.MainActivity;
-import com.yqhok.project_2.R;
+import com.Huohuo.Huohuo.R;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {

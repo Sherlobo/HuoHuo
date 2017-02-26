@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yqhok.project_2.R;
-
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
 
     private Context mContext;
 
-    private List<Huohuo> mHuohuoList;
+    private List<Driver> mDriverList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,8 +25,8 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
         }
     }
 
-    public DriverAdapter(List<Huohuo> huohuoList) {
-        mHuohuoList = huohuoList;
+    public DriverAdapter(List<Driver> driverList) {
+        mDriverList = driverList;
     }
 
     @Override
@@ -42,11 +40,11 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Huohuo huohuo = mHuohuoList.get(position);
+        Driver driver = mDriverList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return mHuohuoList.size();
+        return mDriverList.size();
     }
 }

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.Huohuo.Huohuo.PerfectClickListener;
-import com.yqhok.project_2.R;
+import com.Huohuo.Huohuo.R;
 
 /**
  * Created by yqhok on 2017-02-22.

@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yqhok.project_2.R;
+import com.Huohuo.Huohuo.R;
+
 
 /**
  * Created by Tony on 2017/2/14.

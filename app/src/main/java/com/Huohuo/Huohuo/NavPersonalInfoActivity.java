@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityNavPersonalInfoBinding;
+import com.Huohuo.Huohuo.databinding.ActivityNavPersonalInfoBinding;
 
 /**
  * Created by yqhok on 2017-02-25.

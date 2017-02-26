@@ -11,7 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.yqhok.project_2.R;
+import com.Huohuo.Huohuo.R;
+
 
 public class LoginError extends AppCompatActivity implements View.OnClickListener {
 

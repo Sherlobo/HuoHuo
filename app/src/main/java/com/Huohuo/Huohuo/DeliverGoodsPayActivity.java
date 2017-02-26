@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityDeliverGoodsPayBinding;
+import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsPayBinding;
 
 /**
  * Created by yqhok on 2017-02-25.

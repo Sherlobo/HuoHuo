@@ -22,11 +22,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.Huohuo.Huohuo.databinding.ActivityMainBinding;
 import com.Huohuo.Huohuo.friend.FriendFragment;
 import com.Huohuo.Huohuo.home.HomeFragment;
 import com.Huohuo.Huohuo.order.OrderFragment;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;

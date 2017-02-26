@@ -3,9 +3,9 @@ package com.Huohuo.Huohuo.home.child;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.FragmentHomeMessageBinding;
+import com.Huohuo.Huohuo.databinding.FragmentHomeMessageBinding;
 
 /**
  * Created by yqhok on 2017-02-22.

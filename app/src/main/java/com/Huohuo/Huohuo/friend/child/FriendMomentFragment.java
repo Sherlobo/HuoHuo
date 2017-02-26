@@ -1,8 +1,8 @@
 package com.Huohuo.Huohuo.friend.child;
 
+import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.FragmentFriendMomentBinding;
+import com.Huohuo.Huohuo.databinding.FragmentFriendMomentBinding;
 
 /**
  * Created by yqhok on 2017-02-23.

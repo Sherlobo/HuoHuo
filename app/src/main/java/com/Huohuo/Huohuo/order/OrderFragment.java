@@ -6,12 +6,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.Huohuo.Huohuo.MyFragmentPagerAdapter;
+import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
+import com.Huohuo.Huohuo.databinding.FragmentOrderBinding;
 import com.Huohuo.Huohuo.order.child.OrderFinishedFragment;
 import com.Huohuo.Huohuo.order.child.OrderUnderWayFragment;
 import com.Huohuo.Huohuo.order.child.OrderWaitingFragment;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.FragmentOrderBinding;
 
 import java.util.ArrayList;
 

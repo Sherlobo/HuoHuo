@@ -6,12 +6,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.Huohuo.Huohuo.MyFragmentPagerAdapter;
+import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
+import com.Huohuo.Huohuo.databinding.FragmentFriendBinding;
 import com.Huohuo.Huohuo.friend.child.FriendChatFragment;
 import com.Huohuo.Huohuo.friend.child.FriendContactFragment;
 import com.Huohuo.Huohuo.friend.child.FriendMomentFragment;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.FragmentFriendBinding;
 
 import java.util.ArrayList;
 

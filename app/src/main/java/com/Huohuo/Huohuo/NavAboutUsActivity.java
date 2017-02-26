@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityNavAboutUsBinding;
+import com.Huohuo.Huohuo.databinding.ActivityNavAboutUsBinding;
 
 /**
  * Created by yqhok on 2017-02-24.

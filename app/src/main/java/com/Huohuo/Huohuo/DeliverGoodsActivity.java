@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.yqhok.project_2.R;
-import com.yqhok.project_2.databinding.ActivityDeliverGoodsBinding;
+import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsBinding;
 
 /**
  * Created by yqhok on 2017-02-24.
