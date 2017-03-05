@@ -22,7 +22,7 @@
                 android:layout_margin="20dp"
                 android:text="你的消息"
                 android:gravity="center"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycle_view"

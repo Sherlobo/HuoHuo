@@ -18,7 +18,7 @@
                     android:id="@+id/common_route"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="10dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -28,15 +28,15 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="常用路线"
                         android:layout_marginLeft="20dp"
                         android:gravity="center_vertical"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp"/>
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@mipmap/ic_launcher"/>
 
                 </LinearLayout>
@@ -51,7 +51,7 @@
                     android:id="@+id/common_driver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="10dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -61,15 +61,15 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="常用司机"
                         android:layout_marginLeft="20dp"
                         android:gravity="center_vertical"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp"/>
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@mipmap/ic_launcher"/>
 
                 </LinearLayout>
@@ -84,7 +84,7 @@
                     android:id="@+id/common_truck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="10dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -94,15 +94,15 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:text="常用车型"
                         android:layout_marginLeft="20dp"
                         android:gravity="center_vertical"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp"/>
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@mipmap/ic_launcher"/>
 
                 </LinearLayout>
