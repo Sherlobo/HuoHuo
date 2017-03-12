@@ -14,11 +14,17 @@ import java.util.List;
  * Created by yqhok on 2017-02-26.
  */
 
-public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> {
+public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> implements View.OnClickListener {
 
     private Context mContext;
 
     private List<Route> mRouteList;
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, Route route);
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,6 +54,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_route, parent, false);
+        view.setOnClickListener(this);
         return new ViewHolder(view);
     }
 
@@ -58,10 +65,22 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
         holder.shipper.setText(route.getShipper());
         holder.destination.setText(route.getDestination());
         holder.receiver.setText(route.getReceiver());
+        holder.itemView.setTag(route);
     }
 
     @Override
     public int getItemCount() {
         return mRouteList.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, (Route)view.getTag());
+        }
+    }
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 }

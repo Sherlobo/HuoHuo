@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.Huohuo.Huohuo.Order_underway;
-import com.Huohuo.Huohuo.Order_underwayAdapter;
+import com.Huohuo.Huohuo.Order;
+import com.Huohuo.Huohuo.OrderAdapter;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.databinding.FragmentOrderUnderwayBinding;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBinding> {
-    private List<Order_underway> order_underwayList = new ArrayList<>();
+    private List<Order> orderList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        initOrderUnderway();
+        initOrder();
         initRecycleView();
         loadData();
     }
@@ -42,19 +42,15 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
         RecyclerView recyclerView = bindingView.recycleView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        Order_underwayAdapter adapter = new Order_underwayAdapter(order_underwayList);
+        OrderAdapter adapter = new OrderAdapter(orderList);
         recyclerView.setAdapter(adapter);
     }
-    private void initOrderUnderway(){
-        for(int i=0;i<2;i++){
-            Order_underway order1=new Order_underway("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","发送中");
-            order_underwayList.add(order1);
-            Order_underway order2=new Order_underway("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","发送中");
-            order_underwayList.add(order2);
-            Order_underway order3=new Order_underway("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","发送中");
-            order_underwayList.add(order3);
+
+    private void initOrder(){
+        for(int i = 0; i < 2 ; i ++){
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -10,6 +10,8 @@ import android.widget.Button;
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsSendBinding;
 
+import retrofit2.Retrofit;
+
 
 /**
  * Created by yqhok on 2017-02-25.
@@ -18,6 +20,7 @@ import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsSendBinding;
 public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsSendBinding> implements View.OnClickListener {
 
     private Button button;
+    private Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +45,32 @@ public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsS
     private void initView() {
         button = bindingView.sendOrder;
         button.setOnClickListener(this);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        order = (Order) bundle.getSerializable("order");
+        bindingView.time.setText(order.getTime());
+        bindingView.shipper.setText(order.getShipper());
+        bindingView.starting.setText(order.getStarting());
+        bindingView.receiver.setText(order.getReceiver());
+        bindingView.destination.setText(order.getDestination());
+        bindingView.goodsInfo.setText(order.getWeight() + "     " + order.getTypeOfGoods());
+        bindingView.remark.setText(order.getRemark());
+    }
+
+    private void send(Order o) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://localhost:8080").build();
+        Order order = o;
+        order.save();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send_order:
-                DeliverGoodsPayActivity.start(DeliverGoodsSendActivity.this);
+                if (order != null) {
+                    send(order);
+                }
+                MainActivity.start(DeliverGoodsSendActivity.this);
                 break;
             default:
                 break;

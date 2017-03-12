@@ -26,11 +26,11 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/person_background"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="40dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/default_head_shot"/>
 
                     <TextView
                         android:id="@+id/name"

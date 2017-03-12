@@ -16,11 +16,17 @@ import java.util.List;
  * Created by yqhok on 2017-02-26.
  */
 
-public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder> {
+public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder> implements View.OnClickListener {
 
     private Context mContext;
 
     private List<Driver> mDriverList;
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, Driver driver);
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -63,10 +69,22 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
         holder.ratingBar.setRating(driver.getRating());
         holder.rating.setText("" + driver.getRating());
         holder.message.setText("已完成" + driver.getTaskCount() + "单");
+        holder.itemView.setTag(driver);
     }
 
     @Override
     public int getItemCount() {
         return mDriverList.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, (Driver) view.getTag());
+        }
+    }
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 }

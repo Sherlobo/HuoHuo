@@ -1,10 +1,14 @@
 package com.Huohuo.Huohuo;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
+
 /**
  * Created by yqhok on 2017-02-26.
  */
 
-public class Driver {
+public class Driver extends DataSupport implements Serializable{
 
     private int imageId;
     private String name;

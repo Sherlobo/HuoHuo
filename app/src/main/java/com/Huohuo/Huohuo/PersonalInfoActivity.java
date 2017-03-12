@@ -14,6 +14,8 @@ import com.Huohuo.Huohuo.databinding.ActivityPersonalInfoBinding;
 
 public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBinding> {
 
+    private Client client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

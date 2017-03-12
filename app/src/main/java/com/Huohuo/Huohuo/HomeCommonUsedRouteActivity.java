@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.databinding.ActivityHomeCommonUsedRouteBinding;
@@ -52,6 +53,23 @@ public class HomeCommonUsedRouteActivity extends BaseActivity<ActivityHomeCommon
         recyclerView.setLayoutManager(layoutManager);
         RouteAdapter adapter = new RouteAdapter(routeList);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new RouteAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Route r) {
+                Route route = r;
+                String strShipper = route.getShipper();
+                String strStarting = route.getStarting();
+                String strReceiver = route.getReceiver();
+                String strDestination = route.getDestination();
+                Intent intent = new Intent();
+                intent.putExtra("data_shipper", strShipper);
+                intent.putExtra("data_starting", strStarting);
+                intent.putExtra("data_receiver", strReceiver);
+                intent.putExtra("data_destination", strDestination);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -69,4 +87,5 @@ public class HomeCommonUsedRouteActivity extends BaseActivity<ActivityHomeCommon
         }
         return true;
     }
+
 }

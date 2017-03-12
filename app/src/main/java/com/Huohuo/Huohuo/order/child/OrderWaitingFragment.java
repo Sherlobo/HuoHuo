@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.Huohuo.Huohuo.Order_waiting;
-import com.Huohuo.Huohuo.Order_waitingAdapter;
+import com.Huohuo.Huohuo.Order;
+import com.Huohuo.Huohuo.OrderAdapter;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.databinding.FragmentOrderWaitingBinding;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class OrderWaitingFragment extends BaseFragment<FragmentOrderWaitingBinding> {
-    private List<Order_waiting>  order_waitingList=new ArrayList<>();
+    private List<Order>  orderList = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,29 +32,22 @@ public class OrderWaitingFragment extends BaseFragment<FragmentOrderWaitingBindi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        initOrderWaiting();
+        initOrder();
         initRecycleView();
 
     }
 
     private void initRecycleView() {
-        RecyclerView recyclerView=bindingView.recycleView;
-       LinearLayoutManager layoutManager =new LinearLayoutManager(getContext());
+        RecyclerView recyclerView = bindingView.recycleView;
+       LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        Order_waitingAdapter adapter=new Order_waitingAdapter(order_waitingList);
+        OrderAdapter adapter = new OrderAdapter(orderList);
         recyclerView.setAdapter(adapter);
     }
 
-    public void initOrderWaiting(){
-            for(int i=0;i<2;i++){
-                Order_waiting order1=new Order_waiting("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","其他费用","3000元","发送中");
-                order_waitingList.add(order1);
-                Order_waiting order2=new Order_waiting("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","其他费用","3000元","发送中");
-                order_waitingList.add(order2);
-                Order_waiting order3=new Order_waiting("2017年3月14日 21:00","南京夫子庙","上海外滩","预计费用","其他费用","3000元","发送中");
-                order_waitingList.add(order3);
-
-            }
+    private void initOrder(){
+        for(int i = 0; i < 2; i ++){
+        }
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.Huohuo.Huohuo;
 
 import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -55,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
         initDrawerLayout();
         initListener();
+        initDb();
+    }
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 
     private void initId() {
@@ -186,6 +194,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.include.message.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
         titleMenuImage.setOnClickListener(this);
+    }
+
+    private void initDb() {
+        //Connector.getDatabase();
     }
 
     @Override

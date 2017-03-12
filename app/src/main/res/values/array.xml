@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weight">
+        <item>1-5吨</item>
+        <item>5-10吨</item>
+        <item>10-15吨</item>
+        <item>15-20吨</item>
+        <item>20-30吨</item>
+        <item>30-40吨</item>
+        <item>40-50吨</item>
+    </string-array>
+</resources>

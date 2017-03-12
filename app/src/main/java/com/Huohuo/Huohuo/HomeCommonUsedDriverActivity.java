@@ -53,6 +53,17 @@ public class HomeCommonUsedDriverActivity extends BaseActivity<ActivityHomeCommo
         recyclerView.setLayoutManager(layoutManager);
         DriverAdapter adapter = new DriverAdapter(driverList);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new DriverAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Driver d) {
+                Driver driver = d;
+                String strDriver = driver.getName();
+                Intent intent = new Intent();
+                intent.putExtra("data_return", strDriver);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     @Override
