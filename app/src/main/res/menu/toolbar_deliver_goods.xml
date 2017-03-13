@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/fee_standard"
+        android:icon="@drawable/add"
         android:title="收费标准"
         app:showAsAction="never" />
 

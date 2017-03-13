@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,97 +12,117 @@ import android.widget.Toast;
 
 import com.Huohuo.Huohuo.MainActivity;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.databinding.ActivityLoginBinding;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    //声明控件对象
-    private EditText et_name, et_pass;
-    private Button mLoginButton;
-    private Button mLoginError;
-    private Button mMore;
-    private Button mIdentifying;
-    private Button mGetIdentify;
+public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener {
+
+    private EditText phone;
+    private EditText password;
+    private Button login;
+    private Button loginError;
+    private Button more;
+    private Button identifying;
+    private Button getIdentify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar !=null){
+        showContentView();
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
             actionBar.hide();
         }
-
-        et_name = (EditText) findViewById(R.id.username);
-        et_pass = (EditText) findViewById(R.id.password);
-
-        mLoginButton  = (Button) findViewById(R.id.login);
-        mLoginError   = (Button) findViewById(R.id.login_error);
-        mIdentifying  = (Button) findViewById(R.id.Identifying);
-        mMore          = (Button) findViewById(R.id.more);
-        mGetIdentify  = (Button) findViewById(R.id.GetIdentify) ;
-        mLoginButton.setOnClickListener(this);
-         mLoginError.setOnClickListener(this);
-                mMore.setOnClickListener(this);
-        mIdentifying.setOnClickListener(this);
-        mGetIdentify.setOnClickListener(this);
+        phone = bindingView.phone;
+        password = bindingView.password;
+        login = bindingView.login;
+        loginError = bindingView.loginError;
+        more = bindingView.more;
+        getIdentify = bindingView.GetIdentify;
+        identifying = bindingView.Identifying;
+        login.setOnClickListener(this);
+        loginError.setOnClickListener(this);
+        more.setOnClickListener(this);
+        identifying.setOnClickListener(this);
+        getIdentify.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.login:         //登录
-                Intent tohomepage = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(tohomepage);
-                break;
-            case R.id.login_error: //登录遇到问题
-                Intent tologinerror = new Intent(LoginActivity.this,LoginError.class);
-                startActivity(tologinerror);
-                break;
-            case R.id.more:         //更多 点击按钮后，加载弹出式菜单
-                openDialog();        //利用AlertDialog.Builder类来创建带列表的对话框的方法
-                break;
-            case R.id.Identifying: //用验证码登录
-                if(mGetIdentify.getVisibility()==View.INVISIBLE) {
-                    mGetIdentify.setVisibility(View.VISIBLE);
-                    mIdentifying.setText("使用密码登录");
-                }
-                else if(mGetIdentify.getVisibility()==View.VISIBLE){
-                    mGetIdentify.setVisibility(View.INVISIBLE);
-                    mIdentifying.setText("使用验证码登录");
-                }
-                break;
-            case R.id.GetIdentify: //获取验证码
+            case R.id.login:
+                /*
+                String strPhone = phone.getText().toString();
+                String strPassword = password.getText().toString();
+                if (strPhone == null || strPhone.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+                } else if (strPassword == null || strPassword.isEmpty()){
+                    Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    AVUser.logInInBackground(strPhone, strPassword, new LogInCallback<AVUser>() {
+                        @Override
+                        public void done(AVUser avUser, AVException e) {
+                            if (e == null) {
+                                LoginActivity.this.finish();
+                                MainActivity.start(LoginActivity.this);
+                            } else {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
+                }
+                */
+                LoginActivity.this.finish();
+                MainActivity.start(LoginActivity.this);
+                break;
+            case R.id.login_error:
+                Intent intentToLoginError = new Intent(LoginActivity.this,LoginError.class);
+                startActivity(intentToLoginError);
+                break;
+            case R.id.more:
+                openDialog();
+                break;
+            case R.id.Identifying:
+                if(getIdentify.getVisibility() == View.INVISIBLE) {
+                    getIdentify.setVisibility(View.VISIBLE);
+                    identifying.setText("使用密码登录");
+                }
+                else if(getIdentify.getVisibility() == View.VISIBLE) {
+                    getIdentify.setVisibility(View.INVISIBLE);
+                    identifying.setText("使用验证码登录");
+                }
+                break;
+            case R.id.GetIdentify:
                 break;
             default:
                 break;
         }
     }
 
-    /*利用AlertDialog.Builder类来创建带列表的对话框*/
     protected void openDialog(){
-        final String[] items={"帮助中心","注册","关于我们"};
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);  //实例化AlertDialog.Builder类
-        //添加列表项
+        final String[] items = {"帮助中心","注册","关于我们"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case 0:
-                        Toast.makeText(LoginActivity.this, items[which], Toast.LENGTH_SHORT).show();//弹出消息提示框
+                        Toast.makeText(LoginActivity.this, items[which], Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Intent intent1 = new Intent(LoginActivity.this,Register.class);
+                        Intent intent1 = new Intent(LoginActivity.this,RegisterActivity.class);
                         startActivity(intent1);
                         break;
                     case 2:
-                        Toast.makeText(LoginActivity.this, items[which], Toast.LENGTH_SHORT).show();//弹出消息提示框
+                        Toast.makeText(LoginActivity.this, items[which], Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
         });
-        builder.create().show();//创建并显示对话框
+        builder.create().show();
     }
-
 
 }
