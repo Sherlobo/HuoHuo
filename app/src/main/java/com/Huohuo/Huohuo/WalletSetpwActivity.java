@@ -5,23 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.Huohuo.Huohuo.databinding.ActivityOrderConfirmBinding;
+import com.Huohuo.Huohuo.databinding.ActivityWalletSetpwBinding;
 
 /**
- * Created by Tony on 2017/3/4.
+ * Created by Tony on 2017/3/5.
  */
 
-public class OrderConfirmActivity extends BaseActivity <ActivityOrderConfirmBinding>{
+public class WalletSetpwActivity extends BaseActivity<ActivityWalletSetpwBinding> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_confirm);
+        setContentView(R.layout.activity_wallet_setpw);
         showContentView();
-        setTitle("确认收货");
-    }
-    public static void start(Context context) {
-        Intent intent = new Intent(context, OrderConfirmActivity.class);
-        context.startActivity(intent);
+        setTitle("修改密码");
     }
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, WalletSetpwActivity.class);
+        context.startActivity(intent);
+    }
 }

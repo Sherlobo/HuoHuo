@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add"
-        android:icon="@drawable/add"
+        android:icon="@mipmap/ic_launcher"
         android:title="新增"
         app:showAsAction="ifRoom" />
 

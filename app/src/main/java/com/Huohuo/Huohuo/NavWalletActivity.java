@@ -16,6 +16,7 @@ import com.Huohuo.Huohuo.databinding.ActivityNavWalletBinding;
 public class NavWalletActivity extends BaseActivity<ActivityNavWalletBinding> implements View.OnClickListener {
     private Button mBill;
     private Button mBandCard;
+    private Button mSetpw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,10 @@ public class NavWalletActivity extends BaseActivity<ActivityNavWalletBinding> im
     private void initId(){
         mBill=bindingView.Bill;
         mBandCard=bindingView.BandCard;
+        mSetpw=bindingView.Setpw;
         mBill.setOnClickListener( this);
         mBandCard.setOnClickListener(this);
+        mSetpw.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +48,8 @@ public class NavWalletActivity extends BaseActivity<ActivityNavWalletBinding> im
             case R.id.BandCard:
                 WalletBandCardActivity.start(NavWalletActivity.this);
                 break;
+            case R.id.Setpw:
+                WalletSetpwActivity.start(NavWalletActivity.this);
             default:
                 break;
         }

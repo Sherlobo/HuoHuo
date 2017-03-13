@@ -107,6 +107,22 @@
             android:name=".WalletBillActivty"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".OrderConfirmActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".OrderInfoActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".WalletSetpwActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".OrderEvaluateActivity"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

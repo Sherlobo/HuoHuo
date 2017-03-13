@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/item_driver"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="  请输入本次服务的评价"
+                android:textColor="#555555"
+                android:gravity="top"
+                android:maxLines="5"
+                android:inputType="text"
+                android:background="@null"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星级评价"
+                android:layout_gravity="center"/>
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:ratingBarStyleIndicator"
+                android:rating="0"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:isIndicator="true"
+                android:clickable="false"
+                android:layout_gravity="center" />
+
+            <CheckBox
+                android:id="@+id/CheckBox"
+                android:text="匿名评价"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#555555"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确认"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/White"
+                android:background="#738ffe"/>
+
+        </LinearLayout>
+</layout>

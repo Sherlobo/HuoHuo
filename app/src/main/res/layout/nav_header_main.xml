@@ -10,9 +10,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/head_shot"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/default_head_shot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/touxiang_bg_60"
             android:layout_centerInParent="true"/>
 
         <TextView
