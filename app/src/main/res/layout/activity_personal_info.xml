@@ -30,7 +30,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/touxiang_bg_60"/>
 
                     <TextView
                         android:id="@+id/name"
@@ -82,7 +82,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginLeft="20dp"
-                                android:src="@mipmap/ic_launcher"/>
+                                android:src="@drawable/gold_bg_64"/>
 
                             <TextView
                                 android:layout_width="0dp"

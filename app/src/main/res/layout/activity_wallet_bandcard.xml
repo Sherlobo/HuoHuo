@@ -1,24 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_view"
+        android:layout_height="match_parent"
+        >
+        <android.support.v7.widget.CardView
+            android:id="@+id/order_waiting_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="4dp"
+            app:elevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bankcard_bg_608x200"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="中国银行"
+                    android:textColor="@color/White"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginLeft="28dp"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:text="信用卡"
+                    android:textColor="@color/White"
+                    />
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:text="**** **** **** **** **** 2109"
+                    android:textColor="@color/White"
+                    />
+            </LinearLayout>
 
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/order_waiting_card2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="4dp"
+            app:elevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bankcard_bg_608x200"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="中国银行"
+                    android:textColor="@color/White"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginLeft="28dp"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:text="信用卡"
+                    android:textColor="@color/White"
+                    />
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:text="**** **** **** **** **** 2109"
+                    android:textColor="@color/White"
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
         <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#5677fc"
+            android:text="添加银行卡"
             android:textColor="#fff"
             android:textSize="18dp"
-            android:text="添加银行卡"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginTop="60dp"/>
     </LinearLayout>
 
 </layout>

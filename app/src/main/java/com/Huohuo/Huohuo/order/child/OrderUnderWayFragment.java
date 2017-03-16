@@ -47,8 +47,10 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
     }
 
     private void initOrder(){
-        for(int i = 0; i < 2 ; i ++){
-        }
+        Order order1=new Order("2017年3月16日","啥玩意","南京","杭州电子科技大学","杭州","1000kg","服装","请快速送达",0);
+        orderList.add(order1);
+        Order order2=new Order("2017年3月16日","啥玩意","南京","杭州电子科技大学","杭州","1000kg","服装","请快速送达",0);
+        orderList.add(order2);
     }
 
     @Override

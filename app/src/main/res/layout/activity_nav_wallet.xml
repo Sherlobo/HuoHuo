@@ -64,9 +64,9 @@
                 android:clickable="true" />
             <Button
                 android:id="@+id/Bill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/file"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/forward_btn_48"/>
 
         </LinearLayout>
         <LinearLayout
@@ -89,9 +89,9 @@
                 android:clickable="true" />
             <Button
                 android:id="@+id/BandCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/file"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/forward_btn_48"/>
 
         </LinearLayout>
         <LinearLayout
