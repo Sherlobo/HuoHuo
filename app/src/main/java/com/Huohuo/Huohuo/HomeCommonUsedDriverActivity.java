@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.Huohuo.Huohuo.adapter.DriverAdapter;
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.databinding.ActivityHomeCommonUsedDriverBinding;
 
 import java.util.ArrayList;
@@ -55,13 +57,16 @@ public class HomeCommonUsedDriverActivity extends BaseActivity<ActivityHomeCommo
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new DriverAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view, Driver d) {
-                Driver driver = d;
-                String strDriver = driver.getName();
-                Intent intent = new Intent();
-                intent.putExtra("data_return", strDriver);
-                setResult(RESULT_OK, intent);
-                finish();
+            public void onItemClick(View view, Driver driver) {
+                Intent intent = getIntent();
+                if (intent.getStringExtra("handle") == "set") {
+                    intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Driver", driver);
+                    intent.putExtras(bundle);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }

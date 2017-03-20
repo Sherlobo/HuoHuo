@@ -5,8 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.Huohuo.Huohuo.Friend_chat;
-import com.Huohuo.Huohuo.Friend_chatAdapter;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.adapter.Friend_chatAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.databinding.FragmentFriendChatBinding;
 
@@ -18,15 +18,19 @@ import java.util.List;
  */
 
 public class FriendChatFragment extends BaseFragment<FragmentFriendChatBinding> {
-    private List<Friend_chat> mFriend_chatList=new ArrayList<>();
+
+    private List<Friend_chat> mFriend_chatList = new ArrayList<>();
+
     @Override
     public int setContent() {
         return R.layout.fragment_friend_chat;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.Huohuo.Huohuo.PerfectClickListener;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.listener.PerfectClickListener;
 
 /**
  * Created by yqhok on 2017-02-22.
@@ -116,7 +116,7 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
         if (mProgressBar.getVisibility() != View.GONE) {
             mProgressBar.setVisibility(View.GONE);
         }
-        // 停止动画
+
         if (mRefresh.getVisibility() != View.VISIBLE) {
             mRefresh.setVisibility(View.VISIBLE);
         }
@@ -129,4 +129,5 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

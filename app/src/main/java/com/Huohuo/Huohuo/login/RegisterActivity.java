@@ -1,6 +1,7 @@
 package com.Huohuo.Huohuo.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.databinding.ActivityRegisterBinding;
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SignUpCallback;
 
@@ -48,8 +50,10 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
     @Override
     public void onClick(View view) {
         AVUser user = new AVUser();
-        String strPhone = phone.getText().toString();
+        final String strPhone = phone.getText().toString();
         String strPassword = password.getText().toString();
+        final String strRealName = realName.getText().toString();
+        final String strIdNumber = idNumber.getText().toString();
         user.setUsername(strPhone);
         user.setMobilePhoneNumber(strPhone);
         user.setPassword(strPassword);
@@ -57,6 +61,16 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
             @Override
             public void done(AVException e) {
                 if (e == null) {
+                    AVObject client = new AVObject("Client");
+                    client.put("phone", strPhone);
+                    client.put("realName", strRealName);
+                    client.put("idNumber", strIdNumber);
+                    client.put("orderCount", 0);
+                    client.put("briefIntroduce", "");
+                    client.saveInBackground();
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.putString("id", client.getObjectId());
+                    editor.apply();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     RegisterActivity.this.finish();
                 } else {
@@ -66,5 +80,3 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
         });
     }
 }
-
-

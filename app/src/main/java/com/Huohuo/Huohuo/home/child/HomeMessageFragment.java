@@ -1,22 +1,26 @@
 package com.Huohuo.Huohuo.home.child;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
-import com.Huohuo.Huohuo.Order;
-import com.Huohuo.Huohuo.OrderAdapter;
+import com.Huohuo.Huohuo.OrderInfoActivity;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.adapter.OrderAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
+import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.FragmentHomeMessageBinding;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +31,19 @@ import java.util.List;
 
 public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding> {
 
+    private List<OrderForm> orderFormList = new ArrayList<>();
+
     private SwipeRefreshLayout swipeRefreshLayout;
     private OrderAdapter adapter;
-
-    private List<Order> orderList = new ArrayList<>();
+    private Banner banner;
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initView();
         initOrder();
         initRecycleView();
-        loadData();
     }
 
     @Override
@@ -48,7 +52,7 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     }
 
     private void initView() {
-        Banner banner = bindingView.banner;
+        banner = bindingView.banner;
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner.setImageLoader(new ImageLoader() {
             @Override
@@ -72,17 +76,13 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showContentView();
-                                initView();
-                                initOrder();
-                                initRecycleView();
-                                loadData();
+                                onRefresh();
                                 adapter.notifyDataSetChanged();
                                 swipeRefreshLayout.setRefreshing(false);
                             }
                         });
                     }
-                });
+                }).start();
             }
         });
     }
@@ -91,12 +91,37 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
         RecyclerView recyclerView = bindingView.recycleView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new OrderAdapter(orderList);
+        adapter = new OrderAdapter(orderFormList);
+        adapter.setOnItemClickListener(new OrderAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, OrderForm orderForm) {
+                Intent intent = new Intent(getActivity(), OrderInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("orderForm", orderForm);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
     private void initOrder(){
-        for(int i = 0; i < 2 ; i ++){
+        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
+        orderFormList = new ArrayList<>();
+        for (OrderForm orderForm : list) {
+            if (orderForm.getStatus() == OrderForm.PENDING) {
+                orderFormList.add(orderForm);
+            }
+        }
+        for (OrderForm orderForm : list) {
+            if (orderForm.getStatus() == OrderForm.UNDERWAY) {
+                orderFormList.add(orderForm);
+            }
+        }
+        for (OrderForm orderForm : list) {
+            if (orderForm.getStatus() == OrderForm.WAITING) {
+                orderFormList.add(orderForm);
+            }
         }
     }
 
@@ -109,7 +134,9 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     @Override
     protected void onRefresh() {
         showContentView();
-        loadData();
+        initView();
+        initOrder();
+        initRecycleView();
     }
 
     @Override

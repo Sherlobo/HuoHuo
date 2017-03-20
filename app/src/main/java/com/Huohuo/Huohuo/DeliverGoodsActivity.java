@@ -15,6 +15,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.bean.OrderForm;
+import com.Huohuo.Huohuo.bean.Route;
 import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsBinding;
 
 import java.util.Calendar;
@@ -43,7 +45,7 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
     private String strStarting = null;
     private String strReceiver = null;
     private String strDestination = null;
-    private String strWeight = null;
+    private String strWeight;
     private String typeOfGoods = null;
 
     @Override
@@ -96,17 +98,26 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
                     Toast.makeText(DeliverGoodsActivity.this, "请选择路线", Toast.LENGTH_SHORT).show();
                 //} else if (setTruck.getText() == null) {
                 //    Toast.makeText(DeliverGoodsActivity.this, "请选择车型", Toast.LENGTH_SHORT).show();
-                } else if (strWeight == null || strWeight.isEmpty() || typeOfGoods == null || typeOfGoods.isEmpty()) {
+                } else if (typeOfGoods == null || typeOfGoods.isEmpty()) {
                     Toast.makeText(DeliverGoodsActivity.this, "请选择货物信息", Toast.LENGTH_SHORT).show();
                 } else {
-                    String remark = "";
+                    String strRemark = "";
                     if (bindingView.remark.getText() != null && bindingView.remark.getText().equals("")) {
-                        remark = bindingView.remark.getText().toString();
+                        strRemark = bindingView.remark.getText().toString();
                     }
-                    Order order = new Order(time.toString(), strShipper, strStarting, strReceiver, strDestination, strWeight, typeOfGoods, remark, Order.UNDERWAY);
+                    OrderForm orderForm = new OrderForm();
+                    orderForm.setStartTime(time.toString());
+                    orderForm.setShipper(strShipper);
+                    orderForm.setStarting(strStarting);
+                    orderForm.setReceiver(strReceiver);
+                    orderForm.setDestination(strDestination);
+                    orderForm.setWeight(strWeight);
+                    orderForm.setTypeOfGoods(typeOfGoods);
+                    orderForm.setRemark(strRemark);
+                    orderForm.setStatus(OrderForm.PENDING);
                     Intent intent = new Intent(DeliverGoodsActivity.this, DeliverGoodsSendActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("order", order);
+                    bundle.putSerializable("orderForm", orderForm);
                     intent.putExtras(bundle);
                     this.startActivity(intent);
                 }
@@ -161,10 +172,12 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    strShipper = data.getStringExtra("data_shipper");
-                    strStarting = data.getStringExtra("data_starting");
-                    strReceiver = data.getStringExtra("data_receiver");
-                    strDestination = data.getStringExtra("data_destination");
+                    Bundle bundle = data.getExtras();
+                    Route route = (Route) bundle.getSerializable("route");
+                    strShipper = route.getShipper();
+                    strStarting = route.getStarting();
+                    strReceiver = route.getReceiver();
+                    strDestination = route.getDestination();
                     String strRoute = strShipper + ":" + strStarting + "————" + strReceiver + ":" + strDestination;
                     setRoute.setText(strRoute);
                 }
@@ -183,7 +196,7 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
                 break;
             case 4:
                 if (resultCode == RESULT_OK) {
-                    strWeight = data.getStringExtra("data_weight");
+                    strWeight = data.getStringExtra("weight");
                     typeOfGoods = data.getStringExtra("type_of_goods");
                     setGoodsInfo.setText(strWeight + " " + typeOfGoods);
                 }

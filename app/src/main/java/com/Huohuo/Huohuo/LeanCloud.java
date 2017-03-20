@@ -1,6 +1,5 @@
 package com.Huohuo.Huohuo;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.avos.avoscloud.AVOSCloud;
@@ -11,7 +10,7 @@ import org.litepal.LitePalApplication;
  * Created by yqhok on 2017-03-13.
  */
 
-public class LeanCloud extends Application {
+public class LeanCloud extends LitePalApplication {
 
     private static Context context;
 

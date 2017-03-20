@@ -14,6 +14,12 @@ import com.Huohuo.Huohuo.MainActivity;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.databinding.ActivityLoginBinding;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.LogInCallback;
+
+import org.json.JSONObject;
+import org.litepal.LitePal;
 
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener {
@@ -35,6 +41,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         if(actionBar != null) {
             actionBar.hide();
         }
+        LitePal.getDatabase();
         phone = bindingView.phone;
         password = bindingView.password;
         login = bindingView.login;
@@ -53,7 +60,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-                /*
                 String strPhone = phone.getText().toString();
                 String strPassword = password.getText().toString();
                 if (strPhone == null || strPhone.isEmpty()) {
@@ -68,15 +74,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                                 LoginActivity.this.finish();
                                 MainActivity.start(LoginActivity.this);
                             } else {
-                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                parseJSONWithJSONObject(e.getMessage());
                             }
                         }
                     });
-
                 }
-                */
-                LoginActivity.this.finish();
-                MainActivity.start(LoginActivity.this);
                 break;
             case R.id.login_error:
                 Intent intentToLoginError = new Intent(LoginActivity.this,LoginError.class);
@@ -99,6 +101,25 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                 break;
             default:
                 break;
+        }
+    }
+
+    private void parseJSONWithJSONObject(String jsonData) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            String code = jsonObject.getString("code");
+            switch (code) {
+                case "211":
+                    Toast.makeText(LoginActivity.this, "该用户还未注册", Toast.LENGTH_SHORT).show();
+                    break;
+                case "210":
+                    Toast.makeText(LoginActivity.this, "用户名或密码输入错误", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    Toast.makeText(LoginActivity.this, jsonData, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.Huohuo.Huohuo.Friend_moment;
+import com.Huohuo.Huohuo.R;
 
 import java.util.List;
 

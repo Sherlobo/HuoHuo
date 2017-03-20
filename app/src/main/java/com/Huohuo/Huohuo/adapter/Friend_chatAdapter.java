@@ -1,10 +1,13 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.Huohuo.Huohuo.Friend_chat;
+import com.Huohuo.Huohuo.R;
 
 import java.util.List;
 

@@ -25,7 +25,7 @@
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/person_background"
+                        android:id="@+id/head_shot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
@@ -33,7 +33,7 @@
                         android:src="@drawable/touxiang_bg_60"/>
 
                     <TextView
-                        android:id="@+id/name"
+                        android:id="@+id/real_name"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:textSize="20sp"
@@ -65,6 +65,7 @@
                                 android:textSize="18sp"/>
 
                             <TextView
+                                android:id="@+id/order_count"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="20dp"

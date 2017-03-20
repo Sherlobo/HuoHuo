@@ -1,4 +1,4 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.bean.Driver;
 
 import java.util.List;
 

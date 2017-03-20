@@ -5,8 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.Huohuo.Huohuo.Friend_moment;
-import com.Huohuo.Huohuo.Friend_momentAdapter;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.adapter.Friend_momentAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.databinding.FragmentFriendMomentBinding;
 
@@ -33,7 +33,6 @@ public class FriendMomentFragment extends BaseFragment<FragmentFriendMomentBindi
         showContentView();
         initFriendMoment();
         initRecycleView();
-
     }
 
     private void initRecycleView() {

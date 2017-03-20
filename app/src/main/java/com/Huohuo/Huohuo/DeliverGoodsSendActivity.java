@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsSendBinding;
-
-import retrofit2.Retrofit;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.SaveCallback;
 
 
 /**
@@ -20,7 +23,7 @@ import retrofit2.Retrofit;
 public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsSendBinding> implements View.OnClickListener {
 
     private Button button;
-    private Order order;
+    private OrderForm orderForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,28 +50,50 @@ public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsS
         button.setOnClickListener(this);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        order = (Order) bundle.getSerializable("order");
-        bindingView.time.setText(order.getTime());
-        bindingView.shipper.setText(order.getShipper());
-        bindingView.starting.setText(order.getStarting());
-        bindingView.receiver.setText(order.getReceiver());
-        bindingView.destination.setText(order.getDestination());
-        bindingView.goodsInfo.setText(order.getWeight() + "     " + order.getTypeOfGoods());
-        bindingView.remark.setText(order.getRemark());
+        orderForm = (OrderForm) bundle.getSerializable("orderForm");
+        bindingView.time.setText(orderForm.getStartTime());
+        bindingView.shipper.setText(orderForm.getShipper());
+        bindingView.starting.setText(orderForm.getStarting());
+        bindingView.receiver.setText(orderForm.getReceiver());
+        bindingView.destination.setText(orderForm.getDestination());
+        bindingView.goodsInfo.setText(orderForm.getWeight() + "     " + orderForm.getTypeOfGoods());
+        bindingView.remark.setText(orderForm.getRemark());
     }
 
-    private void send(Order o) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://localhost:8080").build();
-        Order order = o;
-        order.save();
+    private void send(final OrderForm o) {
+        final AVObject AVOrder = new AVObject("OrderForm");
+        AVOrder.put("startTime", o.getStartTime());
+        AVOrder.put("shipper", o.getShipper());
+        AVOrder.put("starting", o.getStarting());
+        AVOrder.put("receiver", o.getReceiver());
+        AVOrder.put("destination", o.getDestination());
+        AVOrder.put("weight", o.getWeight());
+        AVOrder.put("typeOfGoods", o.getTypeOfGoods());
+        AVOrder.put("truck", o.getTruck());
+        AVOrder.put("remark", o.getRemark());
+        AVOrder.put("driver", o.getDriver());
+        AVOrder.put("mile", o.getMile());
+        AVOrder.put("price", o.getPrice());
+        AVOrder.put("status", o.getStatus());
+        AVOrder.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) {
+                    o.setObjectId(AVOrder.getObjectId());
+                    o.save();
+                } else {
+                    Toast.makeText(DeliverGoodsSendActivity.this, "操作失败，请重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send_order:
-                if (order != null) {
-                    send(order);
+                if (orderForm != null) {
+                    send(orderForm);
                 }
                 MainActivity.start(DeliverGoodsSendActivity.this);
                 break;

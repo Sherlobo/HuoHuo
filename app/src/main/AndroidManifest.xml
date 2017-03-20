@@ -10,14 +10,14 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name="com.Huohuo.Huohuo.LeanCloud"
+        android:name=".LeanCloud"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.Huohuo.Huohuo.login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,28 +26,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.MainActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.login.RegisterActivity"
+            android:name=".login.RegisterActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.login.LoginError"
+            android:name=".login.LoginError"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.base.BaseActivity"
+            android:name=".base.BaseActivity"
             android:label="BaseActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.DeliverGoodsActivity"
+            android:name=".DeliverGoodsActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.DeliverGoodsSendActivity"
+            android:name=".DeliverGoodsSendActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
@@ -55,29 +55,33 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.PersonalInfoActivity"
+            android:name=".PersonalInfoActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.Huohuo.Huohuo.NavQrcodeActivity"
+            android:name=".PersonalInfoEditActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".NavQrcodeActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavWalletActivity"
+            android:name=".NavWalletActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavRecentlyViewedActivity"
+            android:name=".NavRecentlyViewedActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavRecommendFriendsActivity"
+            android:name=".NavRecommendFriendsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavSettingsActivity"
+            android:name=".NavSettingsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavSupportCenterActivity"
+            android:name=".NavSupportCenterActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.Huohuo.Huohuo.NavAboutUsActivity"
+            android:name=".NavAboutUsActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".HomeCommonUsedRouteActivity"

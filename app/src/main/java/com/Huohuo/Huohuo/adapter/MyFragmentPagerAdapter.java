@@ -1,4 +1,4 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

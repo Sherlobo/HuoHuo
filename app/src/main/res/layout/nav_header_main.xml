@@ -3,7 +3,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:padding="10dp"
         android:clickable="true"
         android:background="#FF0000">
@@ -16,19 +16,18 @@
             android:layout_centerInParent="true"/>
 
         <TextView
-            android:id="@+id/account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/brief_intro"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:text="android.studio@android.com" />
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/account"
-            android:text="Android Studio"
-            android:textSize="14sp"
+            android:id="@+id/real_name"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_above="@+id/brief_intro"
+            android:textSize="16sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <ImageView

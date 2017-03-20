@@ -5,13 +5,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.Huohuo.Huohuo.Driver;
-import com.Huohuo.Huohuo.DriverAdapter;
 import com.Huohuo.Huohuo.HomeCommonUsedDriverActivity;
 import com.Huohuo.Huohuo.HomeCommonUsedRouteActivity;
 import com.Huohuo.Huohuo.HomeCommonUsedTruckActivity;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.adapter.DriverAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
+import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.databinding.FragmentHomeCommonUsedBinding;
 
 import java.util.ArrayList;
@@ -35,9 +35,8 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initView();
-        initDrivers();
+        initDriver();
         initRecycleView();
-        loadData();
     }
 
     @Override
@@ -59,7 +58,7 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
         recyclerView.setAdapter(adapter);
     }
 
-    private void initDrivers() {
+    private void initDriver() {
         for (int i = 0; i < 2; i ++) {
             Driver driverHuang = new Driver(R.mipmap.ic_launcher, "黄师傅", "浙江 杭州", 4.5f, 100);
             driverList.add(driverHuang);
@@ -97,7 +96,9 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
     @Override
     protected void onRefresh() {
         showContentView();
-        loadData();
+        initView();
+        initDriver();
+        initRecycleView();
     }
 
     @Override

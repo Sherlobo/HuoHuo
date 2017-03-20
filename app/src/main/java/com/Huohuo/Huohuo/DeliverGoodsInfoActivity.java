@@ -25,7 +25,7 @@ public class DeliverGoodsInfoActivity extends BaseActivity<ActivityDeliverGoodsI
 
     private List<CheckedTextView> checkedTextViewList;
 
-    private String truckWeight;
+    private String strWeight;
     private StringBuilder typeOfGoods;
     private CheckedTextView type_1;
     private CheckedTextView type_2;
@@ -103,7 +103,7 @@ public class DeliverGoodsInfoActivity extends BaseActivity<ActivityDeliverGoodsI
             case R.id.confirm:
                 Intent intent = new Intent();
                 typeOfGoods = new StringBuilder();
-                truckWeight = spinner.getSelectedItem().toString();
+                strWeight = spinner.getSelectedItem().toString();
                 for (CheckedTextView checkedTextView : checkedTextViewList) {
                     if (checkedTextView.isChecked()) {
                         typeOfGoods.append(checkedTextView.getText() + "/");
@@ -113,7 +113,7 @@ public class DeliverGoodsInfoActivity extends BaseActivity<ActivityDeliverGoodsI
                     typeOfGoods.deleteCharAt(typeOfGoods.length() - 1);
                 }
                 intent.putExtra("type_of_goods", typeOfGoods.toString());
-                intent.putExtra("data_weight", truckWeight);
+                intent.putExtra("weight", strWeight);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;

@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
-import com.Huohuo.Huohuo.MyFragmentPagerAdapter;
 import com.Huohuo.Huohuo.R;
+import com.Huohuo.Huohuo.adapter.MyFragmentPagerAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.databinding.FragmentFriendBinding;
 import com.Huohuo.Huohuo.friend.child.FriendChatFragment;

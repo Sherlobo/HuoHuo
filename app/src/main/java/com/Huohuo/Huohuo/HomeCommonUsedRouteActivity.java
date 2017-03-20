@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.Huohuo.Huohuo.adapter.RouteAdapter;
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.bean.Route;
 import com.Huohuo.Huohuo.databinding.ActivityHomeCommonUsedRouteBinding;
 
 import java.util.ArrayList;
@@ -55,19 +57,16 @@ public class HomeCommonUsedRouteActivity extends BaseActivity<ActivityHomeCommon
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new RouteAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view, Route r) {
-                Route route = r;
-                String strShipper = route.getShipper();
-                String strStarting = route.getStarting();
-                String strReceiver = route.getReceiver();
-                String strDestination = route.getDestination();
-                Intent intent = new Intent();
-                intent.putExtra("data_shipper", strShipper);
-                intent.putExtra("data_starting", strStarting);
-                intent.putExtra("data_receiver", strReceiver);
-                intent.putExtra("data_destination", strDestination);
-                setResult(RESULT_OK, intent);
-                finish();
+            public void onItemClick(View view, Route route) {
+                Intent intent = getIntent();
+                if (intent.getStringExtra("handle") == "set") {
+                    intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Route", route);
+                    intent.putExtras(bundle);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }

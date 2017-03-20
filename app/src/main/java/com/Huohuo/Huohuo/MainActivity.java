@@ -3,6 +3,7 @@ package com.Huohuo.Huohuo;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,14 +24,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.Huohuo.Huohuo.adapter.MyFragmentPagerAdapter;
+import com.Huohuo.Huohuo.bean.Client;
+import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.ActivityMainBinding;
 import com.Huohuo.Huohuo.friend.FriendFragment;
 import com.Huohuo.Huohuo.home.HomeFragment;
 import com.Huohuo.Huohuo.order.OrderFragment;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
@@ -41,23 +54,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private ViewPager vpContent;
     private ImageView titleMenuImage;
-    private ImageView headShot;
+    private CircleImageView headShot;
+    private TextView realName;
+    private TextView briefIntroduce;
 
     private ActivityMainBinding mBinding;
     private ImageView home;
     private ImageView order;
     private ImageView message;
 
+    private Client client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        initId();
+        initDb();
+        initView();
         initContentFragment();
-        initViews();
         initDrawerLayout();
         initListener();
-        initDb();
     }
 
     public static void start(Context context) {
@@ -65,18 +81,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context.startActivity(intent);
     }
 
-    private void initId() {
-        titleMenu = mBinding.include.titleMenu;
-        toolbar = mBinding.include.toolbarHome;
-        drawerLayout = mBinding.drawerLayout;
-        navigationView = mBinding.navView;
-        floatingActionButton = mBinding.include.fab;
-        vpContent = mBinding.include.vpContent;
-
-        home = mBinding.include.home;
-        order = mBinding.include.order;
-        message = mBinding.include.message;
-        titleMenuImage = mBinding.include.titleMenuImage;
+    private void initDb() {
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        String id = preferences.getString("id", "");
+        if (!id.isEmpty()) {
+            AVQuery<AVObject> avQuery = new AVQuery<>("Client");
+            avQuery.getInBackground(id, new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        client = new Client();
+                        client.setPhone(avObject.get("phone").toString());
+                        client.setRealName(avObject.get("realName").toString());
+                        client.setOrderCount(Integer.parseInt(avObject.get("orderCount").toString()));
+                        client.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
+        AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+        for (final OrderForm orderForm : list) {
+            query.getInBackground(orderForm.getObjectId(), new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
+                        orderForm.save();
+                    }
+                }
+            });
+        }
     }
 
     private void initContentFragment() {
@@ -92,7 +129,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vpContent.setCurrentItem(0);
     }
 
-    private void initViews() {
+    private void initView() {
+        titleMenu = mBinding.include.titleMenu;
+        toolbar = mBinding.include.toolbarHome;
+        drawerLayout = mBinding.drawerLayout;
+        navigationView = mBinding.navView;
+        floatingActionButton = mBinding.include.fab;
+        vpContent = mBinding.include.vpContent;
+
+        home = mBinding.include.home;
+        order = mBinding.include.order;
+        message = mBinding.include.message;
+        titleMenuImage = mBinding.include.titleMenuImage;
+
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -105,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigationView.inflateMenu(R.menu.activity_main_drawer);
         View headerView = navigationView.getHeaderView(0);
         headerView.setOnClickListener(this);
-        headShot = (ImageView) headerView.findViewById(R.id.head_shot);
+        headShot = (CircleImageView) headerView.findViewById(R.id.head_shot);
         headShot.setOnClickListener(this);
         navigationView.setOnClickListener(this);
         ImageView qrcode = (ImageView) headerView.findViewById(R.id.qrcode);
@@ -194,10 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.include.message.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
         titleMenuImage.setOnClickListener(this);
-    }
-
-    private void initDb() {
-        //Connector.getDatabase();
     }
 
     @Override

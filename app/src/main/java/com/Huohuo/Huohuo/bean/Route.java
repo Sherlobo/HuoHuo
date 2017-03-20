@@ -1,10 +1,14 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.bean;
+
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
 
 /**
  * Created by yqhok on 2017-02-26.
  */
 
-public class Route {
+public class Route extends DataSupport implements Serializable {
 
     private String starting;
     private String shipper;

@@ -1,4 +1,4 @@
-package com.Huohuo.Huohuo;
+package com.Huohuo.Huohuo.bean;
 
 import org.litepal.crud.DataSupport;
 
@@ -8,47 +8,42 @@ import java.io.Serializable;
  * Created by Tony on 2017/3/4.
  */
 
-public class Order extends DataSupport implements Serializable{
+public class OrderForm extends DataSupport implements Serializable {
 
-    private String time;
+    private String objectId;
+    private String startTime;
     private String shipper;
     private String starting;
     private String receiver;
     private String destination;
     private String weight;
     private String typeOfGoods;
+    private Truck truck;
     private String remark;
     private Driver driver;
-    private String cost;
-    private String othercost;
-    private String allcost;
+    private double mile;
+    private double price;
     private int status;
 
-    public static final int UNDERWAY = 0;
-    public static final int WAITING = 1;
-    public static final int FINISHED = 2;
+    public static final int PENDING = 0;
+    public static final int UNDERWAY = 1;
+    public static final int WAITING = 2;
+    public static final int FINISHED = 3;
 
-    public Order(String time, String shipper, String starting, String receiver, String destination, String weight, String typeOfGoods, String remark, int status){
-        this.time = time;
-        this.shipper = shipper;
-        this.starting = starting;
-        this.receiver = receiver;
-        this.destination = destination;
-        this.weight = weight;
-        this.typeOfGoods = typeOfGoods;
-        this.remark = remark;
-
-        if (status == UNDERWAY || status == WAITING || status == FINISHED) {
-            this.status = status;
-        }
+    public String  getObjectId() {
+        return objectId;
     }
 
-    public String getTime() {
-        return time;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getShipper() {
@@ -83,28 +78,20 @@ public class Order extends DataSupport implements Serializable{
         this.destination = destination;
     }
 
-    public String getCost() {
-        return cost;
+    public double getMile() {
+        return mile;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public void setMile(double mile) {
+        this.mile = mile;
     }
 
-    public String getOthercost() {
-        return othercost;
+    public double getPrice() {
+        return price;
     }
 
-    public void setOthercost(String othercost) {
-        this.othercost = othercost;
-    }
-
-    public String getAllcost() {
-        return allcost;
-    }
-
-    public void setAllcost(String allcost) {
-        this.allcost = allcost;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getStatus() {
@@ -112,7 +99,7 @@ public class Order extends DataSupport implements Serializable{
     }
 
     public void setStatus(int status) {
-        if (status == UNDERWAY || status == WAITING || status == FINISHED) {
+        if (status == PENDING || status == UNDERWAY || status == WAITING || status == FINISHED) {
             this.status = status;
         }
     }
@@ -133,6 +120,14 @@ public class Order extends DataSupport implements Serializable{
         this.typeOfGoods = typeOfGoods;
     }
 
+    public Truck getTruck() {
+        return truck;
+    }
+
+    public void setTruck(Truck truck) {
+        this.truck = truck;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -148,4 +143,5 @@ public class Order extends DataSupport implements Serializable{
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
+
 }
