@@ -111,6 +111,14 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
         super.onDestroy();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            onRefresh();
+        }
+    }
+
     class Update extends AsyncTask<Void, Integer, Boolean> {
 
         @Override

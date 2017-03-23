@@ -134,6 +134,14 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
         super.onDestroy();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            onRefresh();
+        }
+    }
+
     class Update extends AsyncTask<Void, Integer, Boolean> {
 
         @Override

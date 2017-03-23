@@ -107,6 +107,14 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            onRefresh();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
