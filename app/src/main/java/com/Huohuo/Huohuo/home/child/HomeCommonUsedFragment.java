@@ -25,6 +25,8 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
 
     private List<Driver> driverList = new ArrayList<>();
 
+    private RecyclerView recyclerView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
     }
 
     private void initRecycleView() {
-        RecyclerView recyclerView = bindingView.recycleView;
+        recyclerView = bindingView.recycleView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         DriverAdapter adapter = new DriverAdapter(driverList);
@@ -91,14 +93,6 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    protected void onRefresh() {
-        showContentView();
-        initView();
-        initDriver();
-        initRecycleView();
     }
 
     @Override

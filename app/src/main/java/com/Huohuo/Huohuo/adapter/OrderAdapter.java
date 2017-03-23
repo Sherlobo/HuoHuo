@@ -63,7 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         if (mContext == null) {
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_order,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_order, parent, false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -75,8 +75,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.starting.setText(orderForm.getStarting());
         holder.destination.setText(orderForm.getDestination());
         if (orderForm.getStatus() == OrderForm.FINISHED) {
-            holder.mileEst.setText("里程： " + orderForm.getMile());
-            holder.priceEst.setText("费用： " + orderForm.getPrice());
+            holder.mileEst.setText("里程： " + orderForm.getMile() + "公里");
+            holder.priceEst.setText("费用： " + orderForm.getPrice() + "元");
         } else {
             holder.mileEst.setText("预估里程： " + orderForm.getMile());
             holder.priceEst.setText("预估费用： " + orderForm.getPrice());

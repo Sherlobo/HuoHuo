@@ -59,10 +59,10 @@ public class HomeCommonUsedRouteActivity extends BaseActivity<ActivityHomeCommon
             @Override
             public void onItemClick(View view, Route route) {
                 Intent intent = getIntent();
-                if (intent.getStringExtra("handle") == "set") {
+                if (intent.getStringExtra("handle").equals("set")) {
                     intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("Route", route);
+                    bundle.putSerializable("route", route);
                     intent.putExtras(bundle);
                     setResult(RESULT_OK, intent);
                     finish();

@@ -81,8 +81,8 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         //truckInfo.setText();
         remark.setText("备注： " + strRemark);
         if (orderForm.getStatus() == OrderForm.FINISHED) {
-            mileageEst.setText("里程： " + Double.toString(dbMileageEst));
-            priceEst.setText("费用： " + Double.toString(dbPriceEst));
+            mileageEst.setText("里程： " + Double.toString(dbMileageEst) + "公里");
+            priceEst.setText("费用： " + Double.toString(dbPriceEst) + "元");
         } else {
             mileageEst.setText("预估里程： " + Double.toString(dbMileageEst));
             priceEst.setText("预估费用： " + Double.toString(dbPriceEst));

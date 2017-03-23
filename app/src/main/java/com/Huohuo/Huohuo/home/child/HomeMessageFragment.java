@@ -1,13 +1,12 @@
 package com.Huohuo.Huohuo.home.child;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.Huohuo.Huohuo.OrderInfoActivity;
 import com.Huohuo.Huohuo.R;
@@ -15,10 +14,11 @@ import com.Huohuo.Huohuo.adapter.OrderAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.FragmentHomeMessageBinding;
-import com.bumptech.glide.Glide;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.loader.ImageLoader;
 
 import org.litepal.crud.DataSupport;
 
@@ -41,48 +41,41 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        initView();
+        initDb();
         initOrder();
+        initView();
         initRecycleView();
     }
+
 
     @Override
     public int setContent() {
         return R.layout.fragment_home_message;
     }
 
+    private void initDb() {
+        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
+        AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+        for (final OrderForm orderForm : list) {
+            query.getInBackground(orderForm.getObjectId(), new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
+                        orderForm.save();
+                    }
+                }
+            });
+        }
+    }
+
     private void initView() {
-        banner = bindingView.banner;
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        banner.setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                Glide.with(context).load("").into(imageView);
-            }
-        });
         swipeRefreshLayout = bindingView.swipeRefresh;
         swipeRefreshLayout.setColorSchemeResources(R.color.Red);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                onRefresh();
-                                adapter.notifyDataSetChanged();
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                        });
-                    }
-                }).start();
+                new Update().execute();
             }
         });
     }
@@ -107,7 +100,7 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
 
     private void initOrder(){
         List<OrderForm> list = DataSupport.findAll(OrderForm.class);
-        orderFormList = new ArrayList<>();
+        orderFormList.clear();
         for (OrderForm orderForm : list) {
             if (orderForm.getStatus() == OrderForm.PENDING) {
                 orderFormList.add(orderForm);
@@ -133,14 +126,34 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
 
     @Override
     protected void onRefresh() {
-        showContentView();
-        initView();
-        initOrder();
-        initRecycleView();
+        new Update().execute();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+    class Update extends AsyncTask<Void, Integer, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            swipeRefreshLayout.setRefreshing(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            initOrder();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            swipeRefreshLayout.setRefreshing(false);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
 }

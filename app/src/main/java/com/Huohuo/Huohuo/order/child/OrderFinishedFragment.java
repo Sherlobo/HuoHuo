@@ -1,6 +1,7 @@
 package com.Huohuo.Huohuo.order.child;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,9 +26,10 @@ import java.util.List;
 
 public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBinding> {
 
-    private List<OrderForm> orderFormList;
+    private List<OrderForm> orderFormList = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
     private OrderAdapter adapter;
 
     @Override
@@ -55,31 +57,14 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                onRefresh();
-                                adapter.notifyDataSetChanged();
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                        });
-                    }
-                }).start();
+                new Update().execute();
             }
         });
     }
 
     private void initOrder(){
         List<OrderForm> list = DataSupport.findAll(OrderForm.class);
-        orderFormList = new ArrayList<>();
+        orderFormList.clear();
         for (OrderForm orderForm : list) {
             if (orderForm.getStatus() == OrderForm.FINISHED) {
                 orderFormList.add(orderForm);
@@ -88,7 +73,7 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
     }
 
     private void initRecycleView() {
-        RecyclerView recyclerView = bindingView.recyclerView;
+        recyclerView = bindingView.recyclerView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new OrderAdapter(orderFormList);
@@ -118,14 +103,34 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
 
     @Override
     protected void onRefresh() {
-        showContentView();
-        initView();
-        initOrder();
-        initRecycleView();
+        new Update().execute();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+    class Update extends AsyncTask<Void, Integer, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            swipeRefreshLayout.setRefreshing(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            initOrder();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            swipeRefreshLayout.setRefreshing(false);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
 }
