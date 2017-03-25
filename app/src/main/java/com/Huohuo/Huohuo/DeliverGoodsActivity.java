@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.bean.Route;
+import com.Huohuo.Huohuo.bean.Truck;
 import com.Huohuo.Huohuo.databinding.ActivityDeliverGoodsBinding;
 
 import java.util.Calendar;
@@ -26,7 +28,7 @@ import java.util.Locale;
  * Created by yqhok on 2017-02-24.
  */
 
-public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding> implements View.OnClickListener{
+public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding> implements View.OnClickListener{
 
     private Button button;
     private TextView setTime;
@@ -40,13 +42,23 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
     private StringBuilder time = null;
     private int year, month, day;
     private Calendar calendar;
-
+//route
     private String strShipper = null;
     private String strStarting = null;
     private String strReceiver = null;
     private String strDestination = null;
+//truck
+    private String strkind=null;
+    private String strweight=null;
+    private String strinicost=null;
+    private String strsize=null;
+    private String strovercost=null;
+
+//goods
     private String strWeight;
     private String typeOfGoods = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,15 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_deliver_goods, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.fee_standard:
+                FeeScaleActivity.start(DeliverGoodsActivity.this);
+            default:
+        }
         return true;
     }
 
@@ -184,8 +205,14 @@ public class DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBindi
                 break;
             case 2:
                 if (resultCode == RESULT_OK) {
-                    String returnedData = data.getStringExtra("data_return");
-                    setTruck.setText(returnedData);
+                    Bundle bundle = data.getExtras();
+                    Truck truck = (Truck) bundle.getSerializable("truck") ;
+                    strkind=truck.getKind();
+                    strweight=truck.getWeight();
+                    strinicost=truck.getInicost();
+                    strsize=truck.getSize();
+                    strovercost=truck.getOvercost();
+                    setTruck.setText(strkind);
                 }
                 break;
             case 3:

@@ -5,24 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
-import com.Huohuo.Huohuo.databinding.ActivityAddNewDriverBinding;
+import com.Huohuo.Huohuo.databinding.ActivityFeeScaleBinding;
 
 /**
- * Created by yqhok on 2017-02-26.
+ * Created by JinBo on 2017/3/21.
  */
 
-public class AddNewDriverActivity extends BaseActivity<ActivityAddNewDriverBinding> {
-
+public class FeeScaleActivity extends BaseActivity<ActivityFeeScaleBinding> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_driver);
+        setContentView(R.layout.activity_fee_scale);
         showContentView();
-        setTitle("新增司机");
+        setTitle("收费标准");
     }
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, AddNewDriverActivity.class);
+        Intent intent = new Intent(context, FeeScaleActivity.class);
         context.startActivity(intent);
     }
 }

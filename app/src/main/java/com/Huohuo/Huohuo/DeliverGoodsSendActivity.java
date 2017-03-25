@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -44,6 +45,16 @@ public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsS
         getMenuInflater().inflate(R.menu.toolbar_deliver_goods, menu);
         return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.fee_standard:
+                FeeScaleActivity.start(DeliverGoodsSendActivity.this);
+            default:
+        }
+        return true;
+    }
+
 
     private void initView() {
         button = bindingView.sendOrder;
