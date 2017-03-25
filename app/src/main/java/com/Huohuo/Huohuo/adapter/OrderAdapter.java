@@ -71,26 +71,31 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         OrderForm orderForm = orderFormList.get(position);
-        holder.startTime.setText("发货时间" + orderForm.getStartTime());
+        holder.startTime.setText("发货时间  " + orderForm.getStartTime());
         holder.starting.setText(orderForm.getStarting());
         holder.destination.setText(orderForm.getDestination());
         if (orderForm.getStatus() == OrderForm.FINISHED) {
             holder.mileEst.setText("里程： " + orderForm.getMile() + "公里");
             holder.priceEst.setText("费用： " + orderForm.getPrice() + "元");
         } else {
-            holder.mileEst.setText("预估里程： " + orderForm.getMile());
-            holder.priceEst.setText("预估费用： " + orderForm.getPrice());
+            holder.mileEst.setText("预估里程： " + orderForm.getMile() + "公里");
+            holder.priceEst.setText("预估费用： " + orderForm.getPrice() + "元");
         }
+        holder.confirm.setOnClickListener(this);
+        holder.extend.setOnClickListener(this);
         switch (orderForm.getStatus()) {
             case OrderForm.PENDING:
                 holder.status.setText("待接单");
                 holder.llExtend.setVisibility(View.GONE);
                 break;
             case OrderForm.UNDERWAY:
+                holder.status.setText("已取货");
+                holder.llExtend.setVisibility(View.GONE);
+            case OrderForm.WAITING:
                 holder.status.setText("进行中");
                 holder.llExtend.setVisibility(View.GONE);
                 break;
-            case OrderForm.WAITING:
+            case OrderForm.UNCONFIRMED:
                 holder.status.setText("待收货");
                 holder.confirm.setText("确认收货");
                 holder.extend.setText("延长收货");
@@ -104,6 +109,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 break;
         }
         holder.itemView.setTag(orderForm);
+        holder.confirm.setTag(orderForm);
     }
 
     @Override

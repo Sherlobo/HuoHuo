@@ -123,7 +123,9 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
 
         @Override
         protected void onPreExecute() {
-            swipeRefreshLayout.setRefreshing(true);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
         }
 
         @Override
@@ -135,7 +137,9 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            swipeRefreshLayout.setRefreshing(false);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
             adapter.notifyDataSetChanged();
         }
 

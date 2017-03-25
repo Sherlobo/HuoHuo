@@ -10,34 +10,44 @@ import java.io.Serializable;
 
 public class Driver extends DataSupport implements Serializable {
 
-    private int imageId;
-    private String name;
-    private String region;
+    private String objectId;
+    private String phone;
+    private String realName;
+    private String idNumber;
     private Float rating;
     private int taskCount;
+    private String briefIntroduce;
 
-    public Driver(int imageId, String name, String region, Float rating, int taskCount) {
-        this.imageId = imageId;
-        this.name = name;
-        this.region = region;
-        this.rating = rating;
-        this.taskCount = taskCount;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getName() {
-        return name;
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public void setRating(float rating) {
@@ -58,4 +68,11 @@ public class Driver extends DataSupport implements Serializable {
         return taskCount;
     }
 
+    public String getBriefIntroduce() {
+        return briefIntroduce;
+    }
+
+    public void setBriefIntroduce(String briefIntroduce) {
+        this.briefIntroduce = briefIntroduce;
+    }
 }

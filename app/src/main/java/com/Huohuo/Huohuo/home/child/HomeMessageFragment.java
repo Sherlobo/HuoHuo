@@ -34,6 +34,7 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     private List<OrderForm> orderFormList = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
     private OrderAdapter adapter;
     private Banner banner;
 
@@ -41,9 +42,8 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        initDb();
-        initOrder();
         initView();
+        initOrder();
         initRecycleView();
     }
 
@@ -53,7 +53,19 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
         return R.layout.fragment_home_message;
     }
 
-    private void initDb() {
+    private void initView() {
+        banner = bindingView.banner;
+        swipeRefreshLayout = bindingView.swipeRefresh;
+        swipeRefreshLayout.setColorSchemeResources(R.color.Red);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Update().execute();
+            }
+        });
+    }
+
+    private void initOrder(){
         List<OrderForm> list = DataSupport.findAll(OrderForm.class);
         AVQuery<AVObject> query = new AVQuery<>("OrderForm");
         for (final OrderForm orderForm : list) {
@@ -67,39 +79,6 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
                 }
             });
         }
-    }
-
-    private void initView() {
-        swipeRefreshLayout = bindingView.swipeRefresh;
-        swipeRefreshLayout.setColorSchemeResources(R.color.Red);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Update().execute();
-            }
-        });
-    }
-
-    private void initRecycleView() {
-        RecyclerView recyclerView = bindingView.recycleView;
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new OrderAdapter(orderFormList);
-        adapter.setOnItemClickListener(new OrderAdapter.OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, OrderForm orderForm) {
-                Intent intent = new Intent(getActivity(), OrderInfoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("orderForm", orderForm);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void initOrder(){
-        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
         orderFormList.clear();
         for (OrderForm orderForm : list) {
             if (orderForm.getStatus() == OrderForm.PENDING) {
@@ -118,10 +97,33 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
         }
     }
 
+    private void initRecycleView() {
+        recyclerView = bindingView.recycleView;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new OrderAdapter(orderFormList);
+        adapter.setOnItemClickListener(new OrderAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, OrderForm orderForm) {
+                Intent intent = new Intent(getActivity(), OrderInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("orderForm", orderForm);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        bindingView.recycleView.setFocusable(false);
+        swipeRefreshLayout.setFocusable(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -146,7 +148,9 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
 
         @Override
         protected void onPreExecute() {
-            swipeRefreshLayout.setRefreshing(true);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
         }
 
         @Override
@@ -158,7 +162,9 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            swipeRefreshLayout.setRefreshing(false);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
             adapter.notifyDataSetChanged();
         }
 

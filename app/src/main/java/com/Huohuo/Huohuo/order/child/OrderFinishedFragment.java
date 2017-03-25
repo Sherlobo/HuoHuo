@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.Huohuo.Huohuo.OrderEvaluateActivity;
 import com.Huohuo.Huohuo.OrderInfoActivity;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.adapter.OrderAdapter;
@@ -81,11 +82,22 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
         adapter.setOnItemClickListener(new OrderAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, OrderForm orderForm) {
-                Intent intent = new Intent(getActivity(), OrderInfoActivity.class);
+                Intent intent;
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("orderForm", orderForm);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                switch (view.getId()) {
+                    case R.id.confirm:
+                        intent = new Intent(getActivity(), OrderEvaluateActivity.class);
+                        bundle.putSerializable("orderForm", orderForm);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        break;
+                    case R.id.order_card:
+                        intent = new Intent(getActivity(), OrderInfoActivity.class);
+                        bundle.putSerializable("orderForm", orderForm);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        break;
+                }
             }
         });
     }
@@ -123,7 +135,9 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
 
         @Override
         protected void onPreExecute() {
-            swipeRefreshLayout.setRefreshing(true);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
         }
 
         @Override
@@ -135,7 +149,9 @@ public class OrderFinishedFragment extends BaseFragment<FragmentOrderFinishedBin
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            swipeRefreshLayout.setRefreshing(false);
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
             adapter.notifyDataSetChanged();
         }
 

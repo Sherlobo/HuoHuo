@@ -24,11 +24,14 @@ public class OrderForm extends DataSupport implements Serializable {
     private double mile;
     private double price;
     private int status;
+    private String evaluateToDriver;
+    private String evaluateToClient;
 
     public static final int PENDING = 0;
     public static final int UNDERWAY = 1;
     public static final int WAITING = 2;
-    public static final int FINISHED = 3;
+    public static final int UNCONFIRMED = 3;
+    public static final int FINISHED = 4;
 
     public String  getObjectId() {
         return objectId;
@@ -99,7 +102,7 @@ public class OrderForm extends DataSupport implements Serializable {
     }
 
     public void setStatus(int status) {
-        if (status == PENDING || status == UNDERWAY || status == WAITING || status == FINISHED) {
+        if (status == PENDING || status == UNDERWAY || status == WAITING || status == UNCONFIRMED || status == FINISHED) {
             this.status = status;
         }
     }
@@ -142,6 +145,22 @@ public class OrderForm extends DataSupport implements Serializable {
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public String getEvaluateToDriver() {
+        return evaluateToDriver;
+    }
+
+    public void setEvaluateToDriver(String evaluateToDriver) {
+        this.evaluateToDriver = evaluateToDriver;
+    }
+
+    public String getEvaluateToClient() {
+        return evaluateToClient;
+    }
+
+    public void setEvaluateToClient(String evaluateToClient) {
+        this.evaluateToClient = evaluateToClient;
     }
 
 }

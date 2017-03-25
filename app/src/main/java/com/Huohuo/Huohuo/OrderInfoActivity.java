@@ -2,15 +2,22 @@ package com.Huohuo.Huohuo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.ActivityOrderInfoBinding;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
 
 /**
  * Created by Tony on 2017/3/4.
@@ -84,19 +91,24 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
             mileageEst.setText("里程： " + Double.toString(dbMileageEst) + "公里");
             priceEst.setText("费用： " + Double.toString(dbPriceEst) + "元");
         } else {
-            mileageEst.setText("预估里程： " + Double.toString(dbMileageEst));
-            priceEst.setText("预估费用： " + Double.toString(dbPriceEst));
+            mileageEst.setText("预估里程： " + Double.toString(dbMileageEst) + "公里");
+            priceEst.setText("预估费用： " + Double.toString(dbPriceEst) + "元");
         }
         switch (orderForm.getStatus()) {
             case OrderForm.PENDING:
                 status.setText("待接单");
-                llExtend.setVisibility(View.GONE);
+                confirm.setText("取消订单");
+                extend.setVisibility(View.GONE);
                 break;
             case OrderForm.UNDERWAY:
-                status.setText("进行中");
+                status.setText("已取货");
                 llExtend.setVisibility(View.GONE);
                 break;
             case OrderForm.WAITING:
+                status.setText("进行中");
+                llExtend.setVisibility(View.GONE);
+                break;
+            case OrderForm.UNCONFIRMED:
                 status.setText("待收货");
                 confirm.setText("确认收货");
                 extend.setText("延长收货");
@@ -111,13 +123,84 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         }
     }
 
+    private void send(final OrderForm orderForm) {
+        AVQuery query = new AVQuery("OrderForm");
+        query.getInBackground(orderForm.getObjectId(), new GetCallback() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                if (e == null) {
+                    if (Integer.parseInt(avObject.get("status").toString()) == OrderForm.UNCONFIRMED) {
+                        avObject.put("status", OrderForm.FINISHED);
+                        avObject.saveInBackground();
+                        orderForm.setStatus(OrderForm.FINISHED);
+                        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+                        String id = preferences.getString("id", "");
+                        if (!id.isEmpty()) {
+                            AVQuery<AVObject> avQuery = new AVQuery<>("Client");
+                            avQuery.getInBackground(id, new GetCallback<AVObject>() {
+                                @Override
+                                public void done(AVObject avObject, AVException e) {
+                                    if (e == null) {
+                                        avObject.put("orderCount", Integer.parseInt(avObject.get("orderCount").toString()) + 1);
+                                        avObject.put("points", Integer.parseInt(avObject.get("points").toString()) + 50);
+                                        avObject.saveInBackground();
+                                    } else {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                        orderForm.save();
+                        onRefresh();
+                    } else {
+                        Toast.makeText(OrderInfoActivity.this, "请重试", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm:
+                switch (orderForm.getStatus()) {
+                    case OrderForm.PENDING:
+                        break;
+                    case OrderForm.UNCONFIRMED:
+                        send(orderForm);
+                        break;
+                    case OrderForm.FINISHED:
+                        break;
+                }
                 break;
             case R.id.extend:
                 break;
         }
     }
+
+    @Override
+    protected void onRefresh() {
+        new Update().execute();
+    }
+
+    class Update extends AsyncTask<Void, Integer, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            initView();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+        }
+
+    }
+
 }

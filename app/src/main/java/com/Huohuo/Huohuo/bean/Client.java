@@ -14,6 +14,7 @@ public class Client extends DataSupport implements Serializable{
     private String realName = "";
     private String briefIntroduce = "";
     private int orderCount;
+    private int points;
     private String phone = "";
 
     public int getHeadShotId() {
@@ -46,6 +47,14 @@ public class Client extends DataSupport implements Serializable{
 
     public void setOrderCount(int orderCount) {
         this.orderCount = orderCount;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getPhone() {

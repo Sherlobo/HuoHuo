@@ -10,11 +10,16 @@ import android.widget.TextView;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
 import com.Huohuo.Huohuo.bean.Client;
+import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.ActivityPersonalInfoBinding;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.GetCallback;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,19 +46,28 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
     }
 
     private void initDb() {
+        client = new Client();
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
         String id = preferences.getString("id", "");
+        final List<OrderForm> list = DataSupport.findAll(OrderForm.class);
         if (!id.isEmpty()) {
             AVQuery<AVObject> avQuery = new AVQuery<>("Client");
             avQuery.getInBackground(id, new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
                     if (e == null) {
-                        client = new Client();
                         client.setPhone(avObject.get("phone").toString());
                         client.setRealName(avObject.get("realName").toString());
                         client.setOrderCount(Integer.parseInt(avObject.get("orderCount").toString()));
                         client.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                        client.setOrderCount(0);
+                        for (OrderForm orderForm : list) {
+                            if (orderForm.getStatus() == OrderForm.FINISHED) {
+                                client.setOrderCount(client.getOrderCount() + 1);
+                            }
+                        }
+                        avObject.put("orderCount", client.getOrderCount());
+                        avObject.saveInBackground();
                     } else {
                         e.printStackTrace();
                     }

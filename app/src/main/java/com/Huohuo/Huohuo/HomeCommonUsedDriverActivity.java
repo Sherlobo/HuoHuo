@@ -41,12 +41,6 @@ public class HomeCommonUsedDriverActivity extends BaseActivity<ActivityHomeCommo
     }
 
     private void initDrivers() {
-        for (int i = 0; i < 2; i ++) {
-            Driver driverHuang = new Driver(R.mipmap.ic_launcher, "黄师傅", "浙江 杭州", 4.5f, 100);
-            driverList.add(driverHuang);
-            Driver driverZhang = new Driver(R.mipmap.ic_launcher, "张师傅", "浙江 杭州", 5.0f, 300);
-            driverList.add(driverZhang);
-        }
     }
 
     private void initRecycleView() {
