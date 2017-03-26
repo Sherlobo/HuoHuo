@@ -8,10 +8,6 @@
                 android:icon="@drawable/wallet"
                 android:title="钱包" />
             <item
-                android:id="@+id/recentlyViewed"
-                android:icon="@drawable/recently_viewed"
-                android:title="最近浏览" />
-            <item
                 android:id="@+id/recommendFriends"
                 android:icon="@drawable/recommend_friends"
                 android:title="推荐好友" />

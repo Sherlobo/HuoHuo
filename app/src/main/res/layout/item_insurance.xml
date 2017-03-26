@@ -5,7 +5,9 @@
         android:id="@+id/insurance_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
         app:cardCornerRadius="4dp"
         app:elevation="5dp"
         >
@@ -13,9 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:layout_margin="10dp"
             android:gravity="right"
-            android:background="@drawable/baoxian_bg_1"
+            android:background="@drawable/baoxian_bg_class"
             >
             <LinearLayout
                 android:id="@+id/line"

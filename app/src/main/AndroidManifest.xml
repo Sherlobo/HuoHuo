@@ -69,9 +69,6 @@
             android:name=".NavWalletActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NavRecentlyViewedActivity"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".NavRecommendFriendsActivity"
             android:theme="@style/AppTheme" />
         <activity
