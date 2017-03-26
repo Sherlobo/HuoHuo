@@ -49,7 +49,6 @@ public class FriendChatFragment extends BaseFragment<FragmentFriendChatBinding> 
     }
 
     private void initFriendChat() {
-        for(int i=0;i<2;i++){
             Friend_chat chat1=new Friend_chat("Logo团队","亲爱的XXX,你好。欢迎使用XXX产品。","16.20");
             mFriend_chatList.add(chat1);
             Friend_chat chat2=new Friend_chat("张师傅","亲爱的XXX,你好。欢迎使用XXX产品。","16.20");
@@ -58,7 +57,6 @@ public class FriendChatFragment extends BaseFragment<FragmentFriendChatBinding> 
             mFriend_chatList.add(chat3);
             Friend_chat chat4=new Friend_chat("刘师傅","亲爱的XXX,你好。欢迎使用XXX产品。","5天前");
             mFriend_chatList.add(chat4);
-        }
     }
     @Override
     public void onResume() {

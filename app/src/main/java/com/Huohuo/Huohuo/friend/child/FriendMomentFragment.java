@@ -45,16 +45,12 @@ public class FriendMomentFragment extends BaseFragment<FragmentFriendMomentBindi
 
 
     private void initFriendMoment() {
-        for(int i=0;i<2;i++){
             Friend_moment moment1=new Friend_moment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.5f);
             friend_momentList.add(moment1);
             Friend_moment moment2=new Friend_moment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.4f);
             friend_momentList.add(moment2);
             Friend_moment moment3=new Friend_moment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.3f);
             friend_momentList.add(moment3);
-
-
-        }
     }
 
     @Override

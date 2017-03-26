@@ -10,7 +10,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/order_waiting_card"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="4dp"
             app:elevation="5dp">
@@ -49,7 +49,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/order_waiting_card2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="4dp"
             app:elevation="5dp">
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
-                    android:text="**** **** **** **** **** 2109"
+                    android:text="**** **** **** **** **** 3048"
                     android:textColor="@color/White"
                     />
             </LinearLayout>
@@ -92,7 +92,7 @@
             android:text="添加银行卡"
             android:textColor="#fff"
             android:textSize="18dp"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="150dp"/>
     </LinearLayout>
 
 </layout>

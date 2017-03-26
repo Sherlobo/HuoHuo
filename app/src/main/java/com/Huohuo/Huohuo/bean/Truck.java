@@ -9,17 +9,19 @@ import java.io.Serializable;
  */
 
 public class Truck extends DataSupport implements Serializable {
+    private int truck_picture;
     private String kind;
     private String weight;
     private String inicost;
     private String size;
     private String overcost;
-    public Truck(String kind,String weight,String inicost,String size,String overcost){
+    public Truck(String kind,String weight,String inicost,String size,String overcost,int truck_picture){
         this.kind=kind;
         this.weight=weight;
         this.inicost=inicost;
         this.size=size;
         this.overcost=overcost;
+        this.truck_picture=truck_picture;
     }
     public void setKind(String kind) {
         this.kind=kind;

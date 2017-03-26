@@ -38,12 +38,10 @@ public class HomeInsuranceFragment extends BaseFragment<FragmentHomeInsuranceBin
     }
 
     private void initInsurance() {
-        for (int i = 0; i < 2; i ++) {
             Insurance insurance1 = new Insurance("普通货物运险","100元起");
             insuranceList.add(insurance1);
             Insurance insuranc2 = new Insurance("普通货物运险","100元起");
             insuranceList.add(insuranc2);
-        }
     }
 
     @Override

@@ -56,19 +56,18 @@ public class HomeCommonUsedTruckActivity extends BaseActivity<ActivityHomeCommon
     }
 
     private void initTruck() {
-        Truck truck1=new Truck("小件送","3公斤内","12元起","0.3*0.3*0.2m","2元");
+        Truck truck1=new Truck("小件送","3公斤内","12元起","0.3*0.3*0.2m","2元",R.drawable.truck_order_4);
         mTruckList.add(truck1);
-        Truck truck2=new Truck("面包车","1.5吨","40元起","1.7*1.2*1m","3.5元");
+        Truck truck2=new Truck("面包车","1.5吨","40元起","1.7*1.2*1m","3.5元",R.drawable.truck_order_3);
         mTruckList.add(truck2);
-        Truck truck3=new Truck("金杯车","1.5吨","68元起","2，7*1.3*1.1m","5元");
+        Truck truck3=new Truck("金杯车","1.5吨","68元起","2，7*1.3*1.1m","5元",R.drawable.truck_order_5);
         mTruckList.add(truck3);
-        Truck truck4=new Truck("依维柯","1.6吨","88元起","2.5*1.9*1.3m","5元");
+        Truck truck4=new Truck("依维柯","1.6吨","88元起","2.5*1.9*1.3m","5元",R.drawable.truck_order_6);
         mTruckList.add(truck4);
-        Truck truck5=new Truck("小型货车","1.5吨","88元起","2.8*1.6*1.5m","6元");
+        Truck truck5=new Truck("小型货车","1.5吨","88元起","2.8*1.6*1.5m","6元",R.drawable.truck_order_1);
         mTruckList.add(truck5);
-        Truck truck6=new Truck("中型货车","1.8吨","158元起","4.2*1.8*1.8m","7元");
+        Truck truck6=new Truck("中型货车","1.8吨","158元起","4.2*1.8*1.8m","7元",R.drawable.truck_order_2);
         mTruckList.add(truck6);
-
     }
 
     public static void start(Context context) {
