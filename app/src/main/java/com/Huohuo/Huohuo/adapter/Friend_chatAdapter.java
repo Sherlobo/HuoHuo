@@ -15,8 +15,15 @@ import java.util.List;
  * Created by Tony on 2017/3/6.
  */
 
-public class Friend_chatAdapter extends RecyclerView.Adapter <Friend_chatAdapter.ViewHolder>{
+public class Friend_chatAdapter extends RecyclerView.Adapter <Friend_chatAdapter.ViewHolder> implements View.OnClickListener {
     private List<Friend_chat> mFriend_chatList;
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, Friend_chat friend_chat);
+    }
+
     public Friend_chatAdapter(List<Friend_chat> friend_chatList){
         this.mFriend_chatList=friend_chatList;
     }
@@ -24,8 +31,8 @@ public class Friend_chatAdapter extends RecyclerView.Adapter <Friend_chatAdapter
     @Override
     public Friend_chatAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend_chat,parent,false);
-        Friend_chatAdapter.ViewHolder holder=new Friend_chatAdapter.ViewHolder(view);
-        return holder;
+        view.setOnClickListener(this);
+        return  new ViewHolder(view);
     }
 
     @Override
@@ -34,6 +41,7 @@ public class Friend_chatAdapter extends RecyclerView.Adapter <Friend_chatAdapter
         holder.name.setText(mFriend_chat.getName());
         holder.time.setText(mFriend_chat.getTime());
         holder.chat.setText(mFriend_chat.getChat());
+        holder.itemView.setTag(mFriend_chat);
     }
 
     @Override
@@ -51,5 +59,14 @@ public class Friend_chatAdapter extends RecyclerView.Adapter <Friend_chatAdapter
             time=(TextView) view.findViewById(R.id.time);
             chat=(TextView)view.findViewById(R.id.chat);
         }
+    }
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, (Friend_chat) view.getTag());
+        }
+    }
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 }

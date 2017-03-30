@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.bean.Truck;
 
 import java.util.List;
+
 
 /**
  * Created by JinBo on 2017/3/21.
@@ -49,6 +51,7 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
         holder.inicost.setText(truck.getInicost());
         holder.overcost.setText(truck.getOvercost());
         holder.size.setText(truck.getSize());
+        holder.truck_picture.setImageResource(truck.getImageId());
         holder.itemView.setTag(truck);
 
     }
@@ -71,6 +74,7 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
         private TextView inicost;
         private TextView size;
         private TextView overcost;
+        private ImageView truck_picture;
         public ViewHolder(View view) {
             super(view);
             kind=(TextView)view.findViewById(R.id.kind);
@@ -78,7 +82,7 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
             inicost=(TextView)view.findViewById(R.id.inicost);
             size=(TextView)view.findViewById(R.id.size);
             overcost=(TextView)view.findViewById(R.id.overcost);
-
+            truck_picture=(ImageView)view.findViewById(R.id.truck_picture);
         }
     }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {

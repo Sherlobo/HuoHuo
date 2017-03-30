@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginLeft="5dp"
                 android:background="#CDCDCD">
 
             </LinearLayout>
@@ -55,7 +56,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text="  /起步价 : "
+                        android:text="  /起步价 :"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -64,7 +65,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text=" 12元起 "
+                        android:text=" 12元起"
                         android:textSize="14sp"
                         android:textColor="@color/Red"/>
                     <TextView
@@ -72,7 +73,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text="  （5公里） "
+                        android:text="（5公里)"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
@@ -131,11 +132,6 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/more"/>
 
         </LinearLayout>
 

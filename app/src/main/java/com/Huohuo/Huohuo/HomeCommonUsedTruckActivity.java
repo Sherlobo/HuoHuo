@@ -64,9 +64,9 @@ public class HomeCommonUsedTruckActivity extends BaseActivity<ActivityHomeCommon
         mTruckList.add(truck3);
         Truck truck4=new Truck("依维柯","1.6吨","88元起","2.5*1.9*1.3m","5元",R.drawable.truck_order_6);
         mTruckList.add(truck4);
-        Truck truck5=new Truck("小型货车","1.5吨","88元起","2.8*1.6*1.5m","6元",R.drawable.truck_order_1);
+        Truck truck5=new Truck("小型货车","1.5吨","88元起","2.8*1.6*1.5m","6元",R.drawable.truck_order_2);
         mTruckList.add(truck5);
-        Truck truck6=new Truck("中型货车","1.8吨","158元起","4.2*1.8*1.8m","7元",R.drawable.truck_order_2);
+        Truck truck6=new Truck("中型货车","1.8吨","158元起","4.2*1.8*1.8m","7元",R.drawable.truck_order_1);
         mTruckList.add(truck6);
     }
 

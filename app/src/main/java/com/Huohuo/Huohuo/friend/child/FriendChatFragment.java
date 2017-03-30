@@ -1,10 +1,13 @@
 package com.Huohuo.Huohuo.friend.child;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.Huohuo.Huohuo.Friend_chat;
+import com.Huohuo.Huohuo.MsgActivity;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.adapter.Friend_chatAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
@@ -20,6 +23,8 @@ import java.util.List;
 public class FriendChatFragment extends BaseFragment<FragmentFriendChatBinding> {
 
     private List<Friend_chat> mFriend_chatList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private Friend_chatAdapter adapter;
 
     @Override
     public int setContent() {
@@ -41,11 +46,18 @@ public class FriendChatFragment extends BaseFragment<FragmentFriendChatBinding> 
     }
 
     private void initRecycleView() {
-        RecyclerView recyclerView=bindingView.recycleView;
+        recyclerView=bindingView.recycleView;
         LinearLayoutManager layoutManager =new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        Friend_chatAdapter adapter=new Friend_chatAdapter(mFriend_chatList);
+         adapter=new Friend_chatAdapter(mFriend_chatList);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new Friend_chatAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view,Friend_chat friend_chat) {
+                Intent intent = new Intent(getActivity(), MsgActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initFriendChat() {

@@ -63,5 +63,9 @@ public class Truck extends DataSupport implements Serializable {
         return overcost;
     }
 
+    public int getImageId(){
+        return truck_picture;
+    }
+
 
 }

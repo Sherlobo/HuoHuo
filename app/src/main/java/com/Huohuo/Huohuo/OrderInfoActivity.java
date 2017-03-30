@@ -37,6 +37,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
     private LinearLayout llExtend;
     private Button extend;
     private Button confirm;
+    private Button map;
 
     private OrderForm orderForm;
 
@@ -67,8 +68,11 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         llExtend = bindingView.llExtend;
         extend = bindingView.extend;
         confirm = bindingView.confirm;
+        map=bindingView.map;
         extend.setOnClickListener(this);
         confirm.setOnClickListener(this);
+        map.setOnClickListener(this);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         orderForm = (OrderForm) bundle.getSerializable("orderForm");
@@ -175,6 +179,9 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                 }
                 break;
             case R.id.extend:
+                break;
+            case R.id.map:
+                MapActivity.start(OrderInfoActivity.this);
                 break;
         }
     }
