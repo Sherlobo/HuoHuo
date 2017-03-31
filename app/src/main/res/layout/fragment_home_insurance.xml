@@ -16,6 +16,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1">
                 <Button
+                    android:id="@+id/insurance"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/toubao_1"
