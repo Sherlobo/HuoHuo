@@ -17,7 +17,6 @@ public class LeanCloud extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         context = getApplicationContext();
         AVOSCloud.initialize(this, "BeDY3fUOX1vdTWUevFb7CtyK-gzGzoHsz", "MFc2ErISiyEoizBpkloF8o2d");
         LitePalApplication.initialize(context);

@@ -1,4 +1,4 @@
-package com.yqhok.project_2;
+package com.Huohuo.Huohuo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

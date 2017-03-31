@@ -5,6 +5,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,7 @@ import java.util.Locale;
  * Created by yqhok on 2017-02-24.
  */
 
-public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding> implements View.OnClickListener{
+public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBinding> implements TextWatcher, View.OnClickListener{
 
     private Button button;
     private TextView setTime;
@@ -42,23 +44,17 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
     private StringBuilder time = null;
     private int year, month, day;
     private Calendar calendar;
-//route
-    private String strShipper = null;
-    private String strStarting = null;
-    private String strReceiver = null;
-    private String strDestination = null;
-//truck
-    private String strkind=null;
-    private String strweight=null;
-    private String strinicost=null;
-    private String strsize=null;
-    private String strovercost=null;
 
-//goods
-    private String strWeight;
+    private Route route;
+    private Truck truck;
+
+    private String strShipper;
+    private String strStarting;
+    private String strReceiver;
+    private String strDestination;
+    private String strWeight = null;
     private String typeOfGoods = null;
-
-
+    private String strRemark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,15 +113,11 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
                     Toast.makeText(DeliverGoodsActivity.this, "请选择发货时间", Toast.LENGTH_SHORT).show();
                 } else if (strShipper == null || strShipper.isEmpty()) {
                     Toast.makeText(DeliverGoodsActivity.this, "请选择路线", Toast.LENGTH_SHORT).show();
-                //} else if (setTruck.getText() == null) {
-                //    Toast.makeText(DeliverGoodsActivity.this, "请选择车型", Toast.LENGTH_SHORT).show();
+                } else if (setTruck.getText() == null) {
+                    Toast.makeText(DeliverGoodsActivity.this, "请选择车型", Toast.LENGTH_SHORT).show();
                 } else if (typeOfGoods == null || typeOfGoods.isEmpty()) {
                     Toast.makeText(DeliverGoodsActivity.this, "请选择货物信息", Toast.LENGTH_SHORT).show();
                 } else {
-                    String strRemark = "";
-                    if (bindingView.remark.getText() != null && bindingView.remark.getText().equals("")) {
-                        strRemark = bindingView.remark.getText().toString();
-                    }
                     OrderForm orderForm = new OrderForm();
                     orderForm.setStartTime(time.toString());
                     orderForm.setShipper(strShipper);
@@ -134,6 +126,8 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
                     orderForm.setDestination(strDestination);
                     orderForm.setWeight(strWeight);
                     orderForm.setTypeOfGoods(typeOfGoods);
+                    orderForm.setTruck(truck);
+                    orderForm.setTruckId(truck.getObjectId());
                     orderForm.setRemark(strRemark);
                     orderForm.setStatus(OrderForm.PENDING);
                     Intent intent = new Intent(DeliverGoodsActivity.this, DeliverGoodsSendActivity.class);
@@ -194,7 +188,7 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
             case 1:
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    Route route = (Route) bundle.getSerializable("route");
+                    route = (Route) bundle.getSerializable("route");
                     strShipper = route.getShipper();
                     strStarting = route.getStarting();
                     strReceiver = route.getReceiver();
@@ -206,13 +200,8 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
             case 2:
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    Truck truck = (Truck) bundle.getSerializable("truck") ;
-                    strkind=truck.getKind();
-                    strweight=truck.getWeight();
-                    strinicost=truck.getInicost();
-                    strsize=truck.getSize();
-                    strovercost=truck.getOvercost();
-                    setTruck.setText(strkind);
+                    truck = (Truck) bundle.getSerializable("truck");
+                    setTruck.setText(truck.getType());
                 }
                 break;
             case 3:
@@ -230,4 +219,24 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
                 break;
         }
     }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (strRemark == null) {
+            strRemark = "";
+        } else {
+            strRemark = charSequence.toString();
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
 }

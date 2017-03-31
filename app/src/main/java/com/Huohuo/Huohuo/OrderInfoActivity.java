@@ -40,6 +40,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
     private Button map;
 
     private OrderForm orderForm;
+    private String strTruckInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +49,30 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         showContentView();
         setTitle("订单信息");
         initView();
+        initTruck();
     }
 
     public static void start(Context context) {
         Intent intent = new Intent(context, OrderInfoActivity.class);
         context.startActivity(intent);
+    }
+
+    private void initTruck() {
+        AVQuery query = new AVQuery("Truck");
+        query.getInBackground(orderForm.getTruckId(), new GetCallback() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                if (e == null) {
+                    strTruckInfo = avObject.get("type").toString();
+                    truckInfo.setText(strTruckInfo);
+                }
+            }
+
+            @Override
+            protected void internalDone0(Object o, AVException e) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -68,7 +88,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         llExtend = bindingView.llExtend;
         extend = bindingView.extend;
         confirm = bindingView.confirm;
-        map=bindingView.map;
+        map = bindingView.map;
         extend.setOnClickListener(this);
         confirm.setOnClickListener(this);
         map.setOnClickListener(this);
@@ -76,27 +96,18 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         orderForm = (OrderForm) bundle.getSerializable("orderForm");
-        String strStartTime = orderForm.getStartTime();
-        String strStarting = orderForm.getStarting();
-        String strDestination = orderForm.getDestination();
         String weight = orderForm.getWeight();
-        String strTypeOfGoods = orderForm.getTypeOfGoods();
-        //String strTruckInfo = orderForm.getTruck();
-        String strRemark = orderForm.getRemark();
-        Double dbMileageEst = orderForm.getMile();
-        Double dbPriceEst = orderForm.getPrice();
-        startTime.setText("发货时间  " + strStartTime);
-        starting.setText(strStarting);
-        destination.setText(strDestination);
-        goodsInfo.setText("货物信息：  " + weight + " " + strTypeOfGoods);
-        //truckInfo.setText();
-        remark.setText("备注： " + strRemark);
+        startTime.setText("发货时间  " + orderForm.getStartTime());
+        starting.setText(orderForm.getStarting());
+        destination.setText(orderForm.getDestination());
+        goodsInfo.setText("货物信息：  " + weight + " " + orderForm.getTypeOfGoods());
+        remark.setText("备注： " + orderForm.getRemark());
         if (orderForm.getStatus() == OrderForm.FINISHED) {
-            mileageEst.setText("里程： " + Double.toString(dbMileageEst) + "公里");
-            priceEst.setText("费用： " + Double.toString(dbPriceEst) + "元");
+            mileageEst.setText("里程： " + Double.toString(orderForm.getMile()) + "公里");
+            priceEst.setText("费用： " + Double.toString(orderForm.getPrice()) + "元");
         } else {
-            mileageEst.setText("预估里程： " + Double.toString(dbMileageEst) + "公里");
-            priceEst.setText("预估费用： " + Double.toString(dbPriceEst) + "元");
+            mileageEst.setText("预估里程： " + Double.toString(orderForm.getMile()) + "公里");
+            priceEst.setText("预估费用： " + Double.toString(orderForm.getPrice()) + "元");
         }
         switch (orderForm.getStatus()) {
             case OrderForm.PENDING:

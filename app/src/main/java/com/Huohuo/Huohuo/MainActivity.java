@@ -28,7 +28,9 @@ import android.widget.TextView;
 
 import com.Huohuo.Huohuo.adapter.MyFragmentPagerAdapter;
 import com.Huohuo.Huohuo.bean.Client;
+import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.bean.OrderForm;
+import com.Huohuo.Huohuo.bean.Truck;
 import com.Huohuo.Huohuo.databinding.ActivityMainBinding;
 import com.Huohuo.Huohuo.friend.FriendFragment;
 import com.Huohuo.Huohuo.home.HomeFragment;
@@ -36,6 +38,7 @@ import com.Huohuo.Huohuo.order.OrderFragment;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 
 import org.litepal.crud.DataSupport;
@@ -101,19 +104,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
-        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
-        AVQuery<AVObject> query = new AVQuery<>("OrderForm");
-        for (final OrderForm orderForm : list) {
-            query.getInBackground(orderForm.getObjectId(), new GetCallback<AVObject>() {
-                @Override
-                public void done(AVObject avObject, AVException e) {
-                    if (e == null) {
-                        orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
-                        orderForm.save();
-                    }
+        final AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+        query.whereEqualTo("clientId", id);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+            for (AVObject object : list) {
+                final OrderForm orderForm = new OrderForm();
+                orderForm.setObjectId(object.getObjectId());
+                orderForm.setStartTime(object.get("startTime").toString());
+                orderForm.setShipper(object.get("shipper").toString());
+                orderForm.setStarting(object.get("starting").toString());
+                orderForm.setReceiver(object.get("receiver").toString());
+                orderForm.setDestination(object.get("destination").toString());
+                orderForm.setWeight(object.get("weight").toString());
+                orderForm.setTypeOfGoods(object.get("typeOfGoods").toString());
+                orderForm.setRemark(object.get("remark").toString());
+                orderForm.setMile(Double.parseDouble(object.get("mile").toString()));
+                orderForm.setPrice(Double.parseDouble(object.get("price").toString()));
+                orderForm.setStatus(Integer.parseInt(object.get("status").toString()));
+                orderForm.setTruck(DataSupport.where("objectId = ?", object.get("truckId").toString()).findFirst(Truck.class));
+                if (orderForm.getDriver() != null) {
+                    AVQuery<AVObject> queryDriver = new AVQuery<>("Driver");
+                    queryDriver.getInBackground(object.get("driverId").toString(), new GetCallback<AVObject>() {
+                        @Override
+                        public void done(AVObject avObject, AVException e) {
+                            if (e == null) {
+                                Driver driver = new Driver();
+                                driver.setObjectId(avObject.getObjectId());
+                                driver.setPhone(avObject.get("phone").toString());
+                                driver.setRealName(avObject.get("realName").toString());
+                                driver.setIdNumber(avObject.get("idNumber").toString());
+                                driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
+                                driver.setRating(Integer.parseInt(avObject.get("rating").toString()));
+                                driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                                driver.save();
+                                orderForm.setDriver(driver);
+                                orderForm.save();
+                            }
+                        }
+                    });
                 }
-            });
-        }
+            }
+            }
+        });
     }
 
     private void initContentFragment() {

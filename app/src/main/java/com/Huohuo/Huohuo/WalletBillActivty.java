@@ -24,4 +24,5 @@ public class WalletBillActivty extends BaseActivity<ActivityWalletBillBinding> {
         Intent intent = new Intent(context, WalletBillActivty.class);
         context.startActivity(intent);
     }
+
 }

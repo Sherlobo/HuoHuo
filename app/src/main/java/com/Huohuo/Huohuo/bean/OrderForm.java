@@ -19,8 +19,10 @@ public class OrderForm extends DataSupport implements Serializable {
     private String weight;
     private String typeOfGoods;
     private Truck truck;
+    private String truckId;
     private String remark;
     private Driver driver;
+    private String driverId;
     private double mile;
     private double price;
     private int status;
@@ -163,4 +165,19 @@ public class OrderForm extends DataSupport implements Serializable {
         this.evaluateToClient = evaluateToClient;
     }
 
+    public String getTruckId() {
+        return truckId;
+    }
+
+    public void setTruckId(String truckId) {
+        this.truckId = truckId;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
 }

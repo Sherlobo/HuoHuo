@@ -21,9 +21,9 @@ import java.util.List;
 
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder> implements View.OnClickListener {
 
-    private Context mContext;
+    private Context context;
 
-    private List<Driver> mDriverList;
+    private List<Driver> driverList;
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
@@ -52,31 +52,32 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
     }
 
     public DriverAdapter(List<Driver> driverList) {
-        mDriverList = driverList;
+        this.driverList = driverList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (mContext == null) {
-            mContext = parent.getContext();
+        if (context == null) {
+            context = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_driver, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_driver, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Driver driver = mDriverList.get(position);
+        Driver driver = driverList.get(position);
         holder.realName.setText(driver.getRealName());
         holder.ratingBar.setRating(driver.getRating());
         holder.rating.setText("" + driver.getRating());
         holder.message.setText("已完成" + driver.getTaskCount() + "单");
         holder.itemView.setTag(driver);
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
-        return mDriverList.size();
+        return driverList.size();
     }
 
     @Override

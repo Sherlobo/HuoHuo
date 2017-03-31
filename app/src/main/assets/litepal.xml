@@ -2,13 +2,13 @@
 <litepal>
     <dbname value="Data" ></dbname>
 
-    <version value="5" ></version>
+    <version value="9" ></version>
 
     <list>
-        <mapping class="com.Huohuo.Huohuo.bean.OrderForm"></mapping>
         <mapping class="com.Huohuo.Huohuo.bean.Driver"></mapping>
         <mapping class="com.Huohuo.Huohuo.bean.Route"></mapping>
         <mapping class="com.Huohuo.Huohuo.bean.Truck"></mapping>
         <mapping class="com.Huohuo.Huohuo.bean.Client"></mapping>
+        <mapping class="com.Huohuo.Huohuo.bean.OrderForm"></mapping>
     </list>
 </litepal>

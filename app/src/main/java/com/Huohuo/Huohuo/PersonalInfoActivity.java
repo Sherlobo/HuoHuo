@@ -41,11 +41,11 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
         showContentView();
-        initDb();
+        initClient();
         initView();
     }
 
-    private void initDb() {
+    private void initClient() {
         client = new Client();
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
         String id = preferences.getString("id", "");
@@ -82,7 +82,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
         briefIntroduce = bindingView.briefIntro;
         orderCount = bindingView.orderCount;
         realName.setText(client.getRealName());
-        orderCount.setText(client.getOrderCount());
+        orderCount.setText("" + client.getOrderCount());
         briefIntroduce.setText(client.getBriefIntroduce());
     }
 

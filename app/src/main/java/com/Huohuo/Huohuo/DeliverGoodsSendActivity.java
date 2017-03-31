@@ -2,6 +2,7 @@ package com.Huohuo.Huohuo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,7 +73,10 @@ public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsS
     }
 
     private void send(final OrderForm o) {
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        String id = preferences.getString("id", "");
         final AVObject AVOrder = new AVObject("OrderForm");
+        AVOrder.put("clientId", id);
         AVOrder.put("startTime", o.getStartTime());
         AVOrder.put("shipper", o.getShipper());
         AVOrder.put("starting", o.getStarting());
@@ -80,9 +84,8 @@ public class DeliverGoodsSendActivity extends BaseActivity<ActivityDeliverGoodsS
         AVOrder.put("destination", o.getDestination());
         AVOrder.put("weight", o.getWeight());
         AVOrder.put("typeOfGoods", o.getTypeOfGoods());
-        AVOrder.put("truck", o.getTruck());
+        AVOrder.put("truckId", o.getTruck().getObjectId());
         AVOrder.put("remark", o.getRemark());
-        AVOrder.put("driver", o.getDriver());
         AVOrder.put("mile", o.getMile());
         AVOrder.put("price", o.getPrice());
         AVOrder.put("status", o.getStatus());

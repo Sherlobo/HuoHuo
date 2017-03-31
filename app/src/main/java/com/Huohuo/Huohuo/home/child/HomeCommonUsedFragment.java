@@ -13,6 +13,12 @@ import com.Huohuo.Huohuo.adapter.DriverAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.databinding.FragmentHomeCommonUsedBinding;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +67,21 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
     }
 
     private void initDriver() {
+        List<Driver> driverList = DataSupport.findAll(Driver.class);
+        AVQuery<AVObject> query = new AVQuery<>("Driver");
+        for (final Driver driver : driverList) {
+            query.getInBackground(driver.getObjectId(), new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
+                        driver.setRating(Integer.parseInt(avObject.get("rating").toString()));
+                        driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                        driver.save();
+                    }
+                }
+            });
+        }
     }
 
     @Override

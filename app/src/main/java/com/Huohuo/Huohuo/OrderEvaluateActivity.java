@@ -3,6 +3,7 @@ package com.Huohuo.Huohuo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class OrderEvaluateActivity extends BaseActivity <ActivityOrderEvaluateBi
     private OrderForm orderForm;
     private Driver driver;
 
+    private CardView driverCard;
     private EditText content;
     private RatingBar ratingBar;
     private CheckBox checkBox;
@@ -50,6 +52,7 @@ public class OrderEvaluateActivity extends BaseActivity <ActivityOrderEvaluateBi
     }
 
     private void initView() {
+        driverCard = bindingView.driverCard.driverCard;
         content = bindingView.content;
         ratingBar = bindingView.ratingBar;
         checkBox = bindingView.CheckBox;
@@ -68,40 +71,51 @@ public class OrderEvaluateActivity extends BaseActivity <ActivityOrderEvaluateBi
 
     @Override
     public void onClick(View view) {
-        final float rating = (ratingBar.getRating() + driver.getRating() * driver.getTaskCount()) / (driver.getTaskCount() + 1);
-        final String evaluateToDriver = content.getText().toString();
-        AVQuery queryDriver = new AVQuery("Driver");
-        queryDriver.getInBackground(driver.getObjectId(), new GetCallback() {
-            @Override
-            public void done(AVObject avObject, AVException e) {
-                if (e == null) {
-                    avObject.put("rating", rating);
-                    avObject.saveInBackground();
-                }
-            }
+        switch (view.getId()) {
+            case R.id.confirm:
+                final float rating = (ratingBar.getRating() + driver.getRating() * driver.getTaskCount()) / (driver.getTaskCount() + 1);
+                final String evaluateToDriver = content.getText().toString();
+                AVQuery queryDriver = new AVQuery("Driver");
+                queryDriver.getInBackground(driver.getObjectId(), new GetCallback() {
+                    @Override
+                    public void done(AVObject avObject, AVException e) {
+                        if (e == null) {
+                            avObject.put("rating", rating);
+                            avObject.saveInBackground();
+                        }
+                    }
 
-            @Override
-            protected void internalDone0(Object o, AVException e) {
+                    @Override
+                    protected void internalDone0(Object o, AVException e) {
 
-            }
-        });
-        AVQuery queryOrder = new AVQuery("OrderForm");
-        queryOrder.getInBackground(orderForm.getObjectId(), new GetCallback() {
-            @Override
-            public void done(AVObject avObject, AVException e) {
-                if (e == null) {
-                    avObject.put("evaluateToDriver", evaluateToDriver);
-                    avObject.saveInBackground();
-                    orderForm.setEvaluateToDriver(evaluateToDriver);
-                    orderForm.save();
-                }
-            }
+                    }
+                });
+                AVQuery queryOrder = new AVQuery("OrderForm");
+                queryOrder.getInBackground(orderForm.getObjectId(), new GetCallback() {
+                    @Override
+                    public void done(AVObject avObject, AVException e) {
+                        if (e == null) {
+                            avObject.put("evaluateToDriver", evaluateToDriver);
+                            avObject.saveInBackground();
+                            orderForm.setEvaluateToDriver(evaluateToDriver);
+                            orderForm.save();
+                        }
+                    }
 
-            @Override
-            protected void internalDone0(Object o, AVException e) {
+                    @Override
+                    protected void internalDone0(Object o, AVException e) {
 
-            }
-        });
+                    }
+                });
+                break;
+            case R.id.driver_card:
+                Intent intent = new Intent(OrderEvaluateActivity.this, DriverInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("driver", driver);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+        }
     }
 
 }

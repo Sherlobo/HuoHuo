@@ -15,9 +15,11 @@ import com.Huohuo.Huohuo.databinding.ActivityAddNewRouteBinding;
  */
 
 public class AddNewRouteActivity extends BaseActivity<ActivityAddNewRouteBinding> implements View.OnClickListener{
+
     private Button button;
     private TextView setStarting;
     private TextView setEnding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

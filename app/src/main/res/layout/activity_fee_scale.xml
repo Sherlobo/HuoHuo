@@ -329,7 +329,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="2dp"
-                            android:text="货嚯所有车型装卸货等候时间1小时之内免费，超时一小时后每30分钟加收20源，不足30分钟按30分钟计。"/>
+                            android:text="货嚯所有车型装卸货等候时间1小时之内免费，超时一小时后每30分钟加收20元，不足30分钟按30分钟计。"/>
 
                     </LinearLayout>
 

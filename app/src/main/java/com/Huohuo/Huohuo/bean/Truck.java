@@ -9,38 +9,41 @@ import java.io.Serializable;
  */
 
 public class Truck extends DataSupport implements Serializable {
-    private int truck_picture;
-    private String kind;
+
+    private String objectId;
+    private String type;
     private String weight;
-    private String inicost;
+    private double inicost;
     private String size;
-    private String overcost;
-    public Truck(String kind,String weight,String inicost,String size,String overcost,int truck_picture){
-        this.kind=kind;
-        this.weight=weight;
-        this.inicost=inicost;
-        this.size=size;
-        this.overcost=overcost;
-        this.truck_picture=truck_picture;
-    }
-    public void setKind(String kind) {
-        this.kind=kind;
+    private double overcost;
+    private int imageId;
+
+    public String getObjectId() {
+        return objectId;
     }
 
-    public String getKind() {
-        return kind;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
-    public void setInicost(String inicost) {
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setInicost(double inicost) {
         this.inicost = inicost;
     }
 
-    public String getInicost() {
+    public double getInicost() {
         return inicost;
     }
 
     public void setWeight(String weight) {
-        this.weight=weight;
+        this.weight = weight;
     }
 
     public String getWeight() {
@@ -48,24 +51,27 @@ public class Truck extends DataSupport implements Serializable {
     }
 
     public void setSize(String size) {
-        this.size=size;
+        this.size = size;
     }
 
     public String getSize() {
         return size;
     }
 
-    public void setOvercost(String overcost) {
-        this.overcost=overcost;
+    public void setOvercost(double overcost) {
+        this.overcost = overcost;
     }
 
-    public String getOvercost() {
+    public double getOvercost() {
         return overcost;
     }
 
-    public int getImageId(){
-        return truck_picture;
+    public int getImageId() {
+        return imageId;
     }
 
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
 
 }

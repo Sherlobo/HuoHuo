@@ -53,13 +53,18 @@ public class HomeCommonUsedDriverActivity extends BaseActivity<ActivityHomeCommo
             @Override
             public void onItemClick(View view, Driver driver) {
                 Intent intent = getIntent();
+                Bundle bundle = new Bundle();
                 if (intent.getStringExtra("handle") == "set") {
                     intent = new Intent();
-                    Bundle bundle = new Bundle();
                     bundle.putSerializable("Driver", driver);
                     intent.putExtras(bundle);
                     setResult(RESULT_OK, intent);
                     finish();
+                } else {
+                    intent = new Intent(HomeCommonUsedDriverActivity.this, DriverInfoActivity.class);
+                    bundle.putSerializable("Driver", driver);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });

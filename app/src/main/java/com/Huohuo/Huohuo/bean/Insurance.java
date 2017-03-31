@@ -5,11 +5,13 @@ package com.Huohuo.Huohuo.bean;
  */
 
 public class Insurance {
+
     private String kind;
     private String cost;
-    public Insurance(String kind,String cost){
-        this.kind=kind;
-        this.cost=cost;
+
+    public Insurance(String kind, String cost){
+        this.kind = kind;
+        this.cost = cost;
     }
     public void setKind(String kind) {
         this.kind = kind;

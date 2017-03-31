@@ -3,98 +3,96 @@
 
     <LinearLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:orientation="vertical"
-        tools:context="com.yqhok.project_2.com.Huohuo.project_2.MainActivity">
+        android:orientation="vertical" >
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/Red"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:layout_scrollFlags="scroll|enterAlways|snap">
-                    
-                    <FrameLayout
-                        android:id="@+id/title_menu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/title_menu_image"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_menu"/>
-
-                    </FrameLayout>
-
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            app:theme="@style/AppTheme">
-
-                            <ImageView
-                                android:id="@+id/home"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="bottom"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/home_btn_64_red" />
-
-                            <ImageView
-                                android:id="@+id/order"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="bottom"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/truck_btn_64_red" />
-
-                            <ImageView
-                                android:id="@+id/message"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="bottom"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/chat_btn_64_red_down" />
-
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-                </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_home"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Red"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:id="@+id/title_menu"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/vp_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/White"
-                    android:descendantFocusability="blocksDescendants" />
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab"
+                <ImageView
+                    android:id="@+id/title_menu_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="16dp"
-                    app:srcCompat="@drawable/add"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_menu"/>
+
             </FrameLayout>
 
-        </LinearLayout>
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:theme="@style/AppTheme">
+
+                    <ImageView
+                        android:id="@+id/home"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/titlebar_home" />
+
+                    <ImageView
+                        android:id="@+id/order"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/titlebar_truck" />
+
+                    <ImageView
+                        android:id="@+id/message"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/titlebar_chat" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/White"
+                android:descendantFocusability="blocksDescendants" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                app:srcCompat="@drawable/add"/>
+        </FrameLayout>
+
+    </LinearLayout>
 
 </layout>

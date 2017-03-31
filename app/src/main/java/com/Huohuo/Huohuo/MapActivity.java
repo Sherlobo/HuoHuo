@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.databinding.ActivityMapBinding;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -34,7 +35,7 @@ import java.util.List;
  * Created by JinBo on 2017/3/27.
  */
 
-public class MapActivity extends BaseActivity {
+public class MapActivity extends BaseActivity<ActivityMapBinding> {
     public LocationClient mLocationClient;
 
     private TextView positionText;

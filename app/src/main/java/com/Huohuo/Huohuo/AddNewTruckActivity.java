@@ -15,9 +15,11 @@ import com.Huohuo.Huohuo.databinding.ActivityAddNewTruckBinding;
  */
 
 public class AddNewTruckActivity extends BaseActivity<ActivityAddNewTruckBinding> implements View.OnClickListener {
+
     private Button button;
     private TextView setTruck;
     private TextView remark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +30,11 @@ public class AddNewTruckActivity extends BaseActivity<ActivityAddNewTruckBinding
     }
 
     private void initView() {
-        button=bindingView.confirm;
+        button = bindingView.confirm;
         button.setOnClickListener(this);
-        setTruck=bindingView.setTruck;
+        setTruck = bindingView.setTruck;
         setTruck.setOnClickListener(this);
-        remark=bindingView.remark;
+        remark = bindingView.remark;
         remark.setOnClickListener(this);
 
     }
