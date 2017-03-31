@@ -6,11 +6,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F0F0F0"
         >
         <android.support.v7.widget.CardView
             android:id="@+id/order_waiting_card"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="4dp"
             app:elevation="5dp">
@@ -49,7 +50,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/order_waiting_card2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="4dp"
             app:elevation="5dp">

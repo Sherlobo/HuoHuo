@@ -18,7 +18,7 @@ public class NavSupportCenterActivity extends BaseActivity<ActivityNavSupportCen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_support_center);
         showContentView();
-        setTitle("帮助与反馈");
+        setTitle("建议反馈");
     }
 
     public static void start(Context context) {

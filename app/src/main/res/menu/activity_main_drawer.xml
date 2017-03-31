@@ -7,10 +7,6 @@
                 android:id="@+id/wallet"
                 android:icon="@drawable/wallet"
                 android:title="钱包" />
-            <item
-                android:id="@+id/recommendFriends"
-                android:icon="@drawable/recommend_friends"
-                android:title="推荐好友" />
         </group>
         <group>
             <item
@@ -20,7 +16,7 @@
             <item
                 android:id="@+id/supportCenter"
                 android:icon="@drawable/support_center"
-                android:title="帮助与反馈" />
+                android:title="建议反馈" />
             <item
                 android:id="@+id/aboutUs"
                 android:icon="@drawable/about_us"

@@ -30,7 +30,7 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.View
             mContext = parent.getContext();
         }
         View view= LayoutInflater.from(mContext).inflate(R.layout.item_insurance,parent,false);
-        ViewHolder holder = new ViewHolder(view);
+        InsuranceAdapter.ViewHolder holder = new InsuranceAdapter.ViewHolder(view);
         return holder;
     }
 

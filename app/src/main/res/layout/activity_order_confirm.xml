@@ -5,10 +5,11 @@
     <android.support.v7.widget.CardView
         android:id="@+id/order_waiting_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
-        app:elevation="5dp">
+        app:elevation="5dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +101,7 @@
                         android:id="@+id/linearlayuot2"
                         android:layout_below="@id/linearlayuot1">
                         <LinearLayout
-                            android:layout_width="155dp"
+                            android:layout_width="154dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginLeft="30dp"

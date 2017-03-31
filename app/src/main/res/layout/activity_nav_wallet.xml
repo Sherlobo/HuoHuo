@@ -5,7 +5,8 @@
         android:id="@+id/line"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F0F0F0">
 
         <TextView
             android:id="@+id/RestMoney"
@@ -43,10 +44,12 @@
                 android:background="#00000000"/>
         </LinearLayout>
         <LinearLayout
-
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+
             >
 
             <ImageView
@@ -72,11 +75,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp">
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@drawable/bankcard_bg_48"/>
 
             <TextView
@@ -102,7 +107,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/settings_bg_48"/>
+                android:background="@drawable/settings_bg_48"
+                android:layout_gravity="center_vertical"/>
 
             <Button
                 android:id="@+id/Setpw"
@@ -111,6 +117,7 @@
                 android:text="支付密码设置"
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:background="#00000000"/>
 
         </LinearLayout>

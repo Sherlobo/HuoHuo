@@ -217,15 +217,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         },360);
                         break;
-                    case R.id.recommendFriends:
-                        mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                        mBinding.drawerLayout.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                NavRecommendFriendsActivity.start(MainActivity.this);
-                            }
-                        },360);
-                        break;
                     case R.id.settings:
                         mBinding.drawerLayout.closeDrawer(GravityCompat.START);
                         mBinding.drawerLayout.postDelayed(new Runnable() {

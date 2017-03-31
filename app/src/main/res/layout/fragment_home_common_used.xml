@@ -3,7 +3,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F0F0F0">
 
         <LinearLayout
             android:orientation="vertical"
@@ -12,7 +13,8 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp">
 
                 <LinearLayout
                     android:id="@+id/common_route"
@@ -41,11 +43,14 @@
 
                 </LinearLayout>
 
+
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp">
 
                 <LinearLayout
                     android:id="@+id/common_driver"
@@ -78,7 +83,8 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp">
 
                 <LinearLayout
                     android:id="@+id/common_truck"
@@ -111,7 +117,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:text="司机推荐"/>
 
             <android.support.v7.widget.RecyclerView

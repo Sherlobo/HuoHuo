@@ -19,38 +19,18 @@ import java.util.List;
  */
 
 public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder> implements View.OnClickListener{
-
     private Context mContext;
 
-    private List<Truck> truckList;
+    private List<Truck> mTruckList;
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public TruckAdapter(List<Truck> truckList){
-        this.truckList = truckList;
+    public TruckAdapter(List<Truck> list){
+        mTruckList=list;
     }
 
     public static interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, Truck truck);
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView type;
-        private TextView weight;
-        private TextView inicost;
-        private TextView size;
-        private TextView overcost;
-        private ImageView truck_picture;
-
-        public ViewHolder(View view) {
-            super(view);
-            type = (TextView)view.findViewById(R.id.type);
-            weight = (TextView)view.findViewById(R.id.weight);
-            inicost = (TextView)view.findViewById(R.id.inicost);
-            size = (TextView)view.findViewById(R.id.size);
-            overcost = (TextView)view.findViewById(R.id.overcost);
-            truck_picture = (ImageView)view.findViewById(R.id.truck_picture);
-        }
     }
 
     @Override
@@ -65,19 +45,20 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Truck truck = truckList.get(position);
+        Truck truck=mTruckList.get(position);
+        holder.kind.setText(truck.getType());
         holder.weight.setText(truck.getWeight());
-        holder.type.setText(truck.getType());
-        holder.inicost.setText("" + truck.getInicost());
-        holder.overcost.setText("" + truck.getOvercost());
+        holder.inicost.setText((int) truck.getInicost());
+        holder.overcost.setText((int) truck.getOvercost());
         holder.size.setText(truck.getSize());
         holder.truck_picture.setImageResource(truck.getImageId());
         holder.itemView.setTag(truck);
+
     }
 
     @Override
     public int getItemCount() {
-        return truckList.size();
+        return mTruckList.size();
     }
 
     @Override
@@ -87,6 +68,23 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
         }
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView kind;
+        private TextView weight;
+        private TextView inicost;
+        private TextView size;
+        private TextView overcost;
+        private ImageView truck_picture;
+        public ViewHolder(View view) {
+            super(view);
+            kind=(TextView)view.findViewById(R.id.kind);
+            weight=(TextView)view.findViewById(R.id.weight);
+            inicost=(TextView)view.findViewById(R.id.inicost);
+            size=(TextView)view.findViewById(R.id.size);
+            overcost=(TextView)view.findViewById(R.id.overcost);
+            truck_picture=(ImageView)view.findViewById(R.id.truck_picture);
+        }
+    }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }

@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.Huohuo.Huohuo.R;
-import com.Huohuo.Huohuo.adapter.FriendMomentAdapter;
+import com.Huohuo.Huohuo.adapter.Friend_momentAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.bean.FriendMoment;
 import com.Huohuo.Huohuo.databinding.FragmentFriendMomentBinding;
@@ -43,22 +43,18 @@ public class FriendMomentFragment extends BaseFragment<FragmentFriendMomentBindi
         RecyclerView recyclerView = bindingView.recycleView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        FriendMomentAdapter adapter = new FriendMomentAdapter(friendMomentList);
+        Friend_momentAdapter adapter = new Friend_momentAdapter(friendMomentList);
         recyclerView.setAdapter(adapter);
     }
 
 
     private void initFriendMoment() {
-        for(int i = 0; i < 2; i ++){
             FriendMoment moment1 = new FriendMoment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.5f);
             friendMomentList.add(moment1);
             FriendMoment moment2 = new FriendMoment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.4f);
             friendMomentList.add(moment2);
             FriendMoment moment3 = new FriendMoment("王总评价了张师傅（浙BXXX）","2017年3月14日 21:00","昨天下的单子，没想到今天就到了，东西完好无损，师傅辛苦了。",4.3f);
             friendMomentList.add(moment3);
-
-
-        }
     }
 
     @Override

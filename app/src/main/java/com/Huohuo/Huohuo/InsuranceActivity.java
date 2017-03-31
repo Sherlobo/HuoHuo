@@ -22,7 +22,7 @@ public class InsuranceActivity extends BaseActivity {
         WebView webView=(WebView)findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://baidu.com");
+        webView.loadUrl("http://www.baoyuntong.com/cargo/");
     }
     public static void start(Context context) {
         Intent intent = new Intent(context, InsuranceActivity.class);
