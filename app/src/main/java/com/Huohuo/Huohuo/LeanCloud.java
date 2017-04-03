@@ -19,6 +19,7 @@ public class LeanCloud extends LitePalApplication {
         super.onCreate();
         context = getApplicationContext();
         AVOSCloud.initialize(this, "BeDY3fUOX1vdTWUevFb7CtyK-gzGzoHsz", "MFc2ErISiyEoizBpkloF8o2d");
+        AVOSCloud.setDebugLogEnabled(true);
         LitePalApplication.initialize(context);
     }
 }

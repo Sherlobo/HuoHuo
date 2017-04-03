@@ -72,6 +72,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
         holder.rating.setText("" + driver.getRating());
         holder.message.setText("已完成" + driver.getTaskCount() + "单");
         holder.itemView.setTag(driver);
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override

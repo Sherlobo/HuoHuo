@@ -36,7 +36,6 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
     private TextView setTime;
     private TextView setRoute;
     private TextView setTruck;
-    private TextView setDriver;
     private TextView setGoodsInfo;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
@@ -95,8 +94,6 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
         setRoute.setOnClickListener(this);
         setTruck = bindingView.setTruck;
         setTruck.setOnClickListener(this);
-        setDriver = bindingView.setDriver;
-        setDriver.setOnClickListener(this);
         setGoodsInfo = bindingView.setGoodsInfo;
         setGoodsInfo.setOnClickListener(this);
         calendar = Calendar.getInstance();
@@ -168,15 +165,10 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
                 intentToTruck.putExtra("handle", "set");
                 startActivityForResult(intentToTruck, 2);
                 break;
-            case R.id.setDriver:
-                Intent intentToDriver = new Intent(DeliverGoodsActivity.this, HomeCommonUsedDriverActivity.class);
-                intentToDriver.putExtra("handle", "set");
-                startActivityForResult(intentToDriver, 3);
-                break;
             case R.id.setGoodsInfo:
                 Intent intentToGoodsInfo = new Intent(DeliverGoodsActivity.this, DeliverGoodsInfoActivity.class);
                 intentToGoodsInfo.putExtra("handle", "set");
-                startActivityForResult(intentToGoodsInfo, 4);
+                startActivityForResult(intentToGoodsInfo, 3);
             default:
                 break;
         }
@@ -205,12 +197,6 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
                 }
                 break;
             case 3:
-                if (resultCode == RESULT_OK) {
-                    String returnedData = data.getStringExtra("data_return");
-                    setDriver.setText(returnedData);
-                }
-                break;
-            case 4:
                 if (resultCode == RESULT_OK) {
                     strWeight = data.getStringExtra("weight");
                     typeOfGoods = data.getStringExtra("type_of_goods");

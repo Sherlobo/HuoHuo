@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initDb() {
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
-        String id = preferences.getString("id", "");
         String phone = preferences.getString("phone", "");
         AVQuery<AVObject> queryId = new AVQuery<>("Client");
         queryId.whereEqualTo("phone", phone);
@@ -106,86 +105,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void done(AVObject avObject, AVException e) {
                 if (e == null) {
+                    String id = avObject.getObjectId();
                     AVUser user = AVUser.getCurrentUser();
-                    user.put("id", avObject.getObjectId());
-                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                    editor.putString("id", avObject.getObjectId());
-                    editor.apply();
+                    user.put("id", id);
                     user.saveInBackground();
-                }
-            }
-        });
-        if (id.isEmpty()) {
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-        }
-        if (!id.isEmpty()) {
-            AVQuery<AVObject> avQuery = new AVQuery<>("Client");
-            avQuery.getInBackground(id, new GetCallback<AVObject>() {
-                @Override
-                public void done(AVObject avObject, AVException e) {
-                    if (e == null) {
-                        client = new Client();
-                        client.setPhone(avObject.get("phone").toString());
-                        client.setRealName(avObject.get("realName").toString());
-                        client.setOrderCount(Integer.parseInt(avObject.get("orderCount").toString()));
-                        client.setBriefIntroduce(avObject.get("briefIntroduce").toString());
-                    } else {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-        DataSupport.deleteAll(OrderForm.class);
-        final AVQuery<AVObject> query = new AVQuery<>("OrderForm");
-        query.whereEqualTo("clientId", id);
-        query.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-            for (AVObject object : list) {
-                final OrderForm orderForm = new OrderForm();
-                orderForm.setObjectId(object.getObjectId());
-                orderForm.setStartTime(object.get("startTime").toString());
-                orderForm.setShipper(object.get("shipper").toString());
-                orderForm.setStarting(object.get("starting").toString());
-                orderForm.setReceiver(object.get("receiver").toString());
-                orderForm.setDestination(object.get("destination").toString());
-                orderForm.setWeight(object.get("weight").toString());
-                orderForm.setTypeOfGoods(object.get("typeOfGoods").toString());
-                orderForm.setRemark(object.get("remark").toString());
-                orderForm.setMile(Double.parseDouble(object.get("mile").toString()));
-                orderForm.setPrice(Double.parseDouble(object.get("price").toString()));
-                orderForm.setStatus(Integer.parseInt(object.get("status").toString()));
-                if (orderForm.getDriver() != null) {
-                    AVQuery<AVObject> queryDriver = new AVQuery<>("Driver");
-                    queryDriver.getInBackground(object.get("driverId").toString(), new GetCallback<AVObject>() {
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.putString("id", id);
+                    editor.apply();
+                    AVQuery<AVObject> avQuery = new AVQuery<>("Client");
+                    avQuery.getInBackground(id, new GetCallback<AVObject>() {
                         @Override
                         public void done(AVObject avObject, AVException e) {
                             if (e == null) {
-                                Driver driver = new Driver();
-                                driver.setObjectId(avObject.getObjectId());
-                                driver.setPhone(avObject.get("phone").toString());
-                                driver.setRealName(avObject.get("realName").toString());
-                                driver.setIdNumber(avObject.get("idNumber").toString());
-                                driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
-                                driver.setRating(Float.parseFloat(avObject.get("rating").toString()));
-                                driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
-                                driver.save();
-                                orderForm.setDriver(driver);
-                                orderForm.save();
+                                DataSupport.deleteAll(Client.class);
+                                client = new Client();
+                                client.setPhone(avObject.get("phone").toString());
+                                client.setRealName(avObject.get("realName").toString());
+                                client.setOrderCount(Integer.parseInt(avObject.get("orderCount").toString()));
+                                client.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                                client.save();
+                            } else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    DataSupport.deleteAll(OrderForm.class);
+                    DataSupport.deleteAll(Driver.class);
+                    final AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+                    query.whereEqualTo("clientId", id);
+                    query.findInBackground(new FindCallback<AVObject>() {
+                        @Override
+                        public void done(List<AVObject> list, AVException e) {
+                            if (e == null) {
+                                for (AVObject object : list) {
+                                    final OrderForm orderForm = new OrderForm();
+                                    orderForm.setObjectId(object.getObjectId());
+                                    orderForm.setStartTime(object.get("startTime").toString());
+                                    orderForm.setShipper(object.get("shipper").toString());
+                                    orderForm.setStarting(object.get("starting").toString());
+                                    orderForm.setReceiver(object.get("receiver").toString());
+                                    orderForm.setDestination(object.get("destination").toString());
+                                    orderForm.setWeight(object.get("weight").toString());
+                                    orderForm.setTypeOfGoods(object.get("typeOfGoods").toString());
+                                    orderForm.setRemark(object.get("remark").toString());
+                                    orderForm.setMile(Double.parseDouble(object.get("mile").toString()));
+                                    orderForm.setPrice(Double.parseDouble(object.get("price").toString()));
+                                    orderForm.setStatus(Integer.parseInt(object.get("status").toString()));
+                                    orderForm.setDriverId(object.get("driverId").toString());
+                                    orderForm.save();
+                                    initDriver(orderForm);
+                                }
                             }
                         }
                     });
                 }
             }
+        });
+    }
+
+    private void initDriver(final OrderForm orderForm) {
+        AVQuery<AVObject> query = new AVQuery<>("Driver");
+        query.getInBackground(orderForm.getDriverId(), new GetCallback<AVObject>() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                if (e == null) {
+                    Driver driver = new Driver();
+                    driver.setObjectId(avObject.getObjectId());
+                    driver.setPhone(avObject.get("phone").toString());
+                    driver.setRealName(avObject.get("realName").toString());
+                    driver.setIdNumber(avObject.get("idNumber").toString());
+                    driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
+                    driver.setRating(Float.parseFloat(avObject.get("rating").toString()));
+                    driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                    driver.save();
+                }
             }
         });
     }

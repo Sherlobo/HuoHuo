@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.Huohuo.Huohuo.adapter.TruckAdapter;
@@ -132,19 +130,4 @@ public class HomeCommonUsedTruckActivity extends BaseActivity<ActivityHomeCommon
         context.startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_home_common_used, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add:
-                AddNewTruckActivity.start(HomeCommonUsedTruckActivity.this);
-                break;
-        }
-        return true;
-    }
 }

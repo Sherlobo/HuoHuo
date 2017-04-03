@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Huohuo.Huohuo.base.BaseActivity;
+import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.ActivityOrderInfoBinding;
 import com.avos.avoscloud.AVException;
@@ -28,6 +30,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
     private TextView status;
     private TextView starting;
     private TextView destination;
+    private CardView driverCard;
     private TextView goodsInfo;
     private TextView truckInfo;
     private TextView remark;
@@ -39,6 +42,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
     private Button map;
 
     private OrderForm orderForm;
+    private Driver driver;
     private String strTruckInfo;
 
     @Override
@@ -75,10 +79,24 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
     }
 
     private void initView() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        orderForm = (OrderForm) bundle.getSerializable("orderForm");
         startTime = bindingView.startTime;
         status = bindingView.status;
         starting = bindingView.starting;
         destination = bindingView.destination;
+        driverCard = bindingView.driverCard.driverCard;
+        driverCard.setOnClickListener(this);
+        if (orderForm.getDriver() != null) {
+            driver = orderForm.getDriver();
+            bindingView.driverCard.realName.setText(driver.getRealName());
+            bindingView.driverCard.ratingBar.setRating(Float.parseFloat("" + driver.getRating()));
+            bindingView.driverCard.rating.setText("" + driver.getRating());
+            bindingView.driverCard.message.setText("已完成" + driver.getTaskCount() + "单");
+        } else {
+            driverCard.setVisibility(View.GONE);
+        }
         goodsInfo = bindingView.goodsInfo;
         truckInfo = bindingView.truckInfo;
         remark = bindingView.remark;
@@ -91,10 +109,6 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         extend.setOnClickListener(this);
         confirm.setOnClickListener(this);
         map.setOnClickListener(this);
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        orderForm = (OrderForm) bundle.getSerializable("orderForm");
         String weight = orderForm.getWeight();
         startTime.setText("发货时间  " + orderForm.getStartTime());
         starting.setText(orderForm.getStarting());
@@ -187,6 +201,13 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                     case OrderForm.FINISHED:
                         break;
                 }
+                break;
+            case R.id.driver_card:
+                Intent intent = new Intent(OrderInfoActivity.this, DriverInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("driver", driver);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.extend:
                 break;

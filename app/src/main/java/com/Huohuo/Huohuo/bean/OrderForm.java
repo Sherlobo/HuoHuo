@@ -22,6 +22,7 @@ public class OrderForm extends DataSupport implements Serializable {
     private String truckId;
     private String remark;
     private Driver driver;
+    private String clientId;
     private String driverId;
     private double mile;
     private double price;
@@ -172,6 +173,14 @@ public class OrderForm extends DataSupport implements Serializable {
 
     public void setTruckId(String truckId) {
         this.truckId = truckId;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getDriverId() {

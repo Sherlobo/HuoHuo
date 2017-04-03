@@ -36,7 +36,7 @@
                         android:id="@+id/real_name"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center" />
 
@@ -44,7 +44,7 @@
                         android:id="@+id/brief_intro"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center" />
 
@@ -62,7 +62,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="20dp"
                                 android:text="发货数"
-                                android:textSize="18sp"/>
+                                android:textSize="16sp"/>
 
                             <TextView
                                 android:id="@+id/order_count"
@@ -70,7 +70,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="20dp"
                                 android:text="1000"
-                                android:textSize="18sp"/>
+                                android:textSize="16sp"/>
 
                         </LinearLayout>
 
@@ -91,7 +91,7 @@
                                 android:layout_height="20dp"
                                 android:layout_marginLeft="40dp"
                                 android:text="金牌货主"
-                                android:textSize="18sp"/>
+                                android:textSize="16sp"/>
 
                         </LinearLayout>
 

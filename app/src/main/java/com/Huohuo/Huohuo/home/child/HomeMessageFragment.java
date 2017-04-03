@@ -14,6 +14,7 @@ import com.Huohuo.Huohuo.OrderInfoActivity;
 import com.Huohuo.Huohuo.R;
 import com.Huohuo.Huohuo.adapter.OrderAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
+import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.FragmentHomeMessageBinding;
 import com.avos.avoscloud.AVException;
@@ -68,7 +69,11 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
                 public void done(AVObject avObject, AVException e) {
                     if (e == null) {
                         orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
-                        orderForm.save();
+                        if (orderForm.getStatus() != OrderForm.PENDING) {
+                            initDriver(orderForm);
+                        } else {
+                            orderForm.save();
+                        }
                     }
                 }
             });
@@ -94,6 +99,27 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
                 orderFormList.add(orderForm);
             }
         }
+    }
+
+    private void initDriver(final OrderForm orderForm) {
+        AVQuery<AVObject> query = new AVQuery<>("Driver");
+        query.getInBackground(orderForm.getDriverId(), new GetCallback<AVObject>() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                if (e == null) {
+                    Driver driver = new Driver();
+                    driver.setObjectId(avObject.getObjectId());
+                    driver.setPhone(avObject.get("phone").toString());
+                    driver.setRealName(avObject.get("realName").toString());
+                    driver.setIdNumber(avObject.get("idNumber").toString());
+                    driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
+                    driver.setRating(Float.parseFloat(avObject.get("rating").toString()));
+                    driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                    orderForm.setDriver(driver);
+                    orderForm.save();
+                }
+            }
+        });
     }
 
     private void initView() {

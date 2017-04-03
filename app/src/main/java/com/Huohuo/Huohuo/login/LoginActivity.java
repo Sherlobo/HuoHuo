@@ -2,6 +2,7 @@ package com.Huohuo.Huohuo.login;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -127,7 +128,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-                String strPhone = phone.getText().toString();
+                final String strPhone = phone.getText().toString();
                 String strPassword = password.getText().toString();
                 if (strPhone == null || strPhone.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
@@ -138,6 +139,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                         @Override
                         public void done(AVUser avUser, AVException e) {
                             if (e == null) {
+                                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                                editor.putString("phone", avUser.getMobilePhoneNumber());
+                                editor.apply();
                                 LoginActivity.this.finish();
                                 MainActivity.start(LoginActivity.this);
                             } else {

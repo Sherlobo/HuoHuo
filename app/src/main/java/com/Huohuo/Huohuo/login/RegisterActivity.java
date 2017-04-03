@@ -3,6 +3,7 @@ package com.Huohuo.Huohuo.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -43,6 +44,8 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
     private EventHandler handler;
     private OnSendMessageHandler osmHandler;
 
+    private TimeCount time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
         idNumber.addTextChangedListener(this);
         getIdentifyingCode = bindingView.getIdentify;
         getIdentifyingCode.setOnClickListener(this);
+        time = new TimeCount(30000, 1000);
         register = bindingView.register;
         register.setOnClickListener(this);
     }
@@ -122,7 +126,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                 user.setUsername(strPhone);
                 user.setMobilePhoneNumber(strPhone);
                 user.setPassword(strPassword);
-                if (strPhone == null || strPassword == null || strRealName == null || strIdNumber == null) {
+                if (strPhone == null || strPassword == null || strRealName == null || strIdNumber == null || strIdentifyingCode == null) {
                     Toast.makeText(RegisterActivity.this, "身份信息有误，请重试", Toast.LENGTH_SHORT).show();
                 } else {
                     AVObject client = new AVObject("Client");
@@ -150,6 +154,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                 }
                 break;
             case R.id.getIdentify:
+                time.start();
                 SMSLog.getInstance().i("verification phone ==>>" + strPhone);
                 SMSSDK.getVerificationCode("+" + SMSSDK.getCountry(DEFAULT_COUNTRY_ID)[1], strPhone, osmHandler);
                 break;
@@ -170,4 +175,25 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
     @Override
     public void afterTextChanged(Editable editable) {
     }
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            getIdentifyingCode.setBackgroundResource(R.drawable.shape_unclickable);
+            getIdentifyingCode.setClickable(false);
+            getIdentifyingCode.setText(millisUntilFinished / 1000 + "秒后可重新发送");
+        }
+
+        @Override
+        public void onFinish() {
+            getIdentifyingCode.setBackgroundResource(R.drawable.shape);
+            getIdentifyingCode.setClickable(true);
+        }
+    }
+
 }
