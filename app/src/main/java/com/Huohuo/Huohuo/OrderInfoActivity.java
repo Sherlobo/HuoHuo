@@ -3,7 +3,6 @@ package com.Huohuo.Huohuo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -166,7 +165,6 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                             });
                         }
                         orderForm.save();
-                        onRefresh();
                     } else {
                         Toast.makeText(OrderInfoActivity.this, "请重试", Toast.LENGTH_SHORT).show();
                     }
@@ -184,6 +182,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                         break;
                     case OrderForm.UNCONFIRMED:
                         send(orderForm);
+                        finish();
                         break;
                     case OrderForm.FINISHED:
                         break;
@@ -195,30 +194,6 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                 MapActivity.start(OrderInfoActivity.this);
                 break;
         }
-    }
-
-    @Override
-    protected void onRefresh() {
-        new Update().execute();
-    }
-
-    class Update extends AsyncTask<Void, Integer, Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            initView();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
-
     }
 
 }

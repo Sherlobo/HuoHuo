@@ -3,7 +3,6 @@ package com.Huohuo.Huohuo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -53,19 +52,8 @@ public class DriverInfoActivity extends BaseActivity<ActivityDriverInfoBinding> 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_person_info, menu);
-        return true;
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.edit:
-                PersonalInfoEditActivity.start(DriverInfoActivity.this);
-                break;
-            case R.id.share:
-                break;
         }
     }
 }

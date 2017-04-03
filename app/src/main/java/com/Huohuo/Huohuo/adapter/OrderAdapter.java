@@ -96,6 +96,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 holder.llExtend.setVisibility(View.GONE);
                 break;
             case OrderForm.UNCONFIRMED:
+                holder.llExtend.setVisibility(View.VISIBLE);
                 holder.status.setText("待收货");
                 holder.confirm.setText("确认收货");
                 holder.extend.setText("延长收货");

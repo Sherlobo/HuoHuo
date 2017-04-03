@@ -19,6 +19,7 @@ import java.util.List;
  */
 
 public class MsgActivity extends BaseActivity {
+
     private List<Msg> msgList = new ArrayList<Msg>();
 
     private EditText inputText;

@@ -28,6 +28,7 @@ public class OrderForm extends DataSupport implements Serializable {
     private int status;
     private String evaluateToDriver;
     private String evaluateToClient;
+    private boolean isPayed = false;
 
     public static final int PENDING = 0;
     public static final int UNDERWAY = 1;
@@ -180,4 +181,13 @@ public class OrderForm extends DataSupport implements Serializable {
     public void setDriverId(String driverId) {
         this.driverId = driverId;
     }
+
+    public boolean isPayed() {
+        return isPayed;
+    }
+
+    public void setPayed(boolean payed) {
+        isPayed = payed;
+    }
+
 }

@@ -14,6 +14,10 @@ import com.Huohuo.Huohuo.adapter.OrderAdapter;
 import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.bean.OrderForm;
 import com.Huohuo.Huohuo.databinding.FragmentOrderUnderwayBinding;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
 
 import org.litepal.crud.DataSupport;
 
@@ -63,9 +67,21 @@ public class OrderUnderWayFragment extends BaseFragment<FragmentOrderUnderwayBin
     }
 
     private void initOrder(){
-        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
+        List<OrderForm> orderList = DataSupport.findAll(OrderForm.class);
+        AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+        for (final OrderForm orderForm : orderList) {
+            query.getInBackground(orderForm.getObjectId(), new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
+                        orderForm.save();
+                    }
+                }
+            });
+        }
         orderFormList.clear();
-        for (OrderForm orderForm : list) {
+        for (OrderForm orderForm : orderList) {
             if (orderForm.getStatus() == OrderForm.PENDING || orderForm.getStatus() == OrderForm.UNDERWAY) {
                 orderFormList.add(orderForm);
             }

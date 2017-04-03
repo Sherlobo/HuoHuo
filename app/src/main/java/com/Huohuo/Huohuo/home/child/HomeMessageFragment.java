@@ -89,6 +89,11 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
                 orderFormList.add(orderForm);
             }
         }
+        for (OrderForm orderForm : orderList) {
+            if (orderForm.getStatus() == OrderForm.UNCONFIRMED) {
+                orderFormList.add(orderForm);
+            }
+        }
     }
 
     private void initView() {
@@ -134,6 +139,7 @@ public class HomeMessageFragment extends BaseFragment<FragmentHomeMessageBinding
     @Override
     public void onResume() {
         super.onResume();
+        onRefresh();
         swipeRefreshLayout.setFocusable(false);
     }
 

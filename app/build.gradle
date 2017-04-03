@@ -22,6 +22,13 @@ android {
     dataBinding {
         enabled = true
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
 }
 
 dependencies {
@@ -43,5 +50,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.bigkoo:quicksidebar:1.0.3'
     compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
+    compile name:'SMSSDK-2.1.4', ext:'aar'
+    compile name:'SMSSDKGUI-2.1.4', ext:'aar'
     testCompile 'junit:junit:4.12'
 }

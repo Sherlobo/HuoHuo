@@ -1,10 +1,12 @@
 package com.Huohuo.Huohuo.home.child;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.Huohuo.Huohuo.DriverInfoActivity;
 import com.Huohuo.Huohuo.HomeCommonUsedDriverActivity;
 import com.Huohuo.Huohuo.HomeCommonUsedRouteActivity;
 import com.Huohuo.Huohuo.HomeCommonUsedTruckActivity;
@@ -16,9 +18,7 @@ import com.Huohuo.Huohuo.databinding.FragmentHomeCommonUsedBinding;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.GetCallback;
-
-import org.litepal.crud.DataSupport;
+import com.avos.avoscloud.FindCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,7 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
     private List<Driver> driverList = new ArrayList<>();
 
     private RecyclerView recyclerView;
+    private DriverAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,6 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
         showContentView();
         initView();
         initDriver();
-        initRecycleView();
     }
 
     @Override
@@ -62,26 +62,42 @@ public class HomeCommonUsedFragment extends BaseFragment<FragmentHomeCommonUsedB
         recyclerView = bindingView.recycleView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        DriverAdapter adapter = new DriverAdapter(driverList);
+        adapter = new DriverAdapter(driverList);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new DriverAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Driver driver) {
+                Intent intent = new Intent(getActivity(), DriverInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("driver", driver);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initDriver() {
-        List<Driver> driverList = DataSupport.findAll(Driver.class);
         AVQuery<AVObject> query = new AVQuery<>("Driver");
-        for (final Driver driver : driverList) {
-            query.getInBackground(driver.getObjectId(), new GetCallback<AVObject>() {
-                @Override
-                public void done(AVObject avObject, AVException e) {
-                    if (e == null) {
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    driverList.clear();
+                    for (AVObject avObject : list) {
+                        Driver driver = new Driver();
+                        driver.setObjectId(avObject.getObjectId());
+                        driver.setPhone(avObject.get("phone").toString());
+                        driver.setRealName(avObject.get("realName").toString());
+                        driver.setIdNumber(avObject.get("idNumber").toString());
                         driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
-                        driver.setRating(Integer.parseInt(avObject.get("rating").toString()));
+                        driver.setRating(Float.parseFloat(avObject.get("rating").toString()));
                         driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
-                        driver.save();
+                        driverList.add(driver);
                     }
+                    initRecycleView();
                 }
-            });
-        }
+            }
+        });
     }
 
     @Override

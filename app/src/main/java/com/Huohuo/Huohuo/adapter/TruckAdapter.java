@@ -21,12 +21,12 @@ import java.util.List;
 public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder> implements View.OnClickListener{
     private Context mContext;
 
-    private List<Truck> mTruckList;
+    private List<Truck> truckList;
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public TruckAdapter(List<Truck> list){
-        mTruckList=list;
+    public TruckAdapter(List<Truck> truckList){
+        this.truckList = truckList;
     }
 
     public static interface OnRecyclerViewItemClickListener {
@@ -45,11 +45,11 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Truck truck=mTruckList.get(position);
-        holder.kind.setText(truck.getType());
+        Truck truck = truckList.get(position);
+        holder.type.setText(truck.getType());
         holder.weight.setText(truck.getWeight());
-        holder.inicost.setText((int) truck.getInicost());
-        holder.overcost.setText((int) truck.getOvercost());
+        holder.inicost.setText("" + truck.getInicost());
+        holder.overcost.setText("" + truck.getOvercost());
         holder.size.setText(truck.getSize());
         holder.truck_picture.setImageResource(truck.getImageId());
         holder.itemView.setTag(truck);
@@ -58,7 +58,7 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mTruckList.size();
+        return truckList.size();
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView kind;
+        private TextView type;
         private TextView weight;
         private TextView inicost;
         private TextView size;
@@ -77,12 +77,12 @@ public class TruckAdapter extends RecyclerView.Adapter <TruckAdapter.ViewHolder>
         private ImageView truck_picture;
         public ViewHolder(View view) {
             super(view);
-            kind=(TextView)view.findViewById(R.id.kind);
-            weight=(TextView)view.findViewById(R.id.weight);
-            inicost=(TextView)view.findViewById(R.id.inicost);
-            size=(TextView)view.findViewById(R.id.size);
-            overcost=(TextView)view.findViewById(R.id.overcost);
-            truck_picture=(ImageView)view.findViewById(R.id.truck_picture);
+            type = (TextView)view.findViewById(R.id.type);
+            weight = (TextView)view.findViewById(R.id.weight);
+            inicost = (TextView)view.findViewById(R.id.inicost);
+            size = (TextView)view.findViewById(R.id.size);
+            overcost = (TextView)view.findViewById(R.id.overcost);
+            truck_picture = (ImageView)view.findViewById(R.id.truck_picture);
         }
     }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {

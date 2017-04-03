@@ -55,6 +55,7 @@ public class FriendContactWithHeadersAdapter extends FriendContactAdapter<Recycl
         TextView textView = (TextView) holder.itemView;
         textView.setText(String.valueOf(getItem(position).getFirstLetter()));
         holder.itemView.setBackgroundColor(getRandomColor());
+        holder.itemView.setOnClickListener(this);
         holder.itemView.setTag(getItem(position));
     }
 

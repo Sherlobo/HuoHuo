@@ -14,14 +14,15 @@ import com.Huohuo.Huohuo.base.BaseFragment;
 import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.bean.Person;
 import com.Huohuo.Huohuo.databinding.FragmentFriendContactBinding;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
 import com.bigkoo.quicksidebar.QuickSideBarTipsView;
 import com.bigkoo.quicksidebar.QuickSideBarView;
 import com.bigkoo.quicksidebar.listener.OnQuickSideBarTouchListener;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class FriendContactFragment extends BaseFragment<FragmentFriendContactBin
     private LinkedList<Person> personList = new LinkedList<>();
     private HashMap<String, Integer> letters = new HashMap<>();
     private RecyclerView recyclerView;
+    private FriendContactWithHeadersAdapter adapter;
     private QuickSideBarTipsView quickSideBarTipsView;
     private QuickSideBarView quickSideBarView;
 
@@ -53,14 +55,30 @@ public class FriendContactFragment extends BaseFragment<FragmentFriendContactBin
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initPerson();
-        initView();
     }
 
     private void initPerson() {
-        List<Driver> driverList = DataSupport.findAll(Driver.class);
-        for (Driver driver : driverList) {
-            personList.add(driver);
-        }
+        AVQuery<AVObject> query = new AVQuery<>("Driver");
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    personList.clear();
+                    for (AVObject avObject : list) {
+                        Driver driver = new Driver();
+                        driver.setObjectId(avObject.getObjectId());
+                        driver.setPhone(avObject.get("phone").toString());
+                        driver.setRealName(avObject.get("realName").toString());
+                        driver.setIdNumber(avObject.get("idNumber").toString());
+                        driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
+                        driver.setRating(Integer.parseInt(avObject.get("rating").toString()));
+                        driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
+                        personList.add(driver);
+                    }
+                    initView();
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -70,29 +88,27 @@ public class FriendContactFragment extends BaseFragment<FragmentFriendContactBin
         quickSideBarView.setOnQuickSideBarTouchListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        FriendContactWithHeadersAdapter adapter = new FriendContactWithHeadersAdapter();
+        adapter = new FriendContactWithHeadersAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new FriendContactWithHeadersAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Person person) {
                 Intent intent = new Intent(getActivity(), DriverInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("driver", person);
+                Driver driver = (Driver) person;
+                bundle.putSerializable("driver", driver);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-        ArrayList<String> customLetters = new ArrayList<>();
         int position = 0;
         for (Person person : personList) {
             String letter = person.getFirstLetter();
             if (!letters.containsKey(letter)) {
                 letters.put(letter, position);
-                customLetters.add(letter);
             }
             position ++;
         }
-        quickSideBarView.setLetters(customLetters);
         adapter.addAll(personList);
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
         recyclerView.addItemDecoration(headersDecor);

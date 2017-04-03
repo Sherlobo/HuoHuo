@@ -30,7 +30,6 @@ import com.Huohuo.Huohuo.adapter.MyFragmentPagerAdapter;
 import com.Huohuo.Huohuo.bean.Client;
 import com.Huohuo.Huohuo.bean.Driver;
 import com.Huohuo.Huohuo.bean.OrderForm;
-import com.Huohuo.Huohuo.bean.Truck;
 import com.Huohuo.Huohuo.databinding.ActivityMainBinding;
 import com.Huohuo.Huohuo.friend.FriendFragment;
 import com.Huohuo.Huohuo.home.HomeFragment;
@@ -38,6 +37,7 @@ import com.Huohuo.Huohuo.order.OrderFragment;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 
@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView order;
     private ImageView message;
 
+    List<Fragment> fragmentList = new ArrayList<>();
+
     private Client client;
 
     @Override
@@ -79,6 +81,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initListener();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+    }
+
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
@@ -87,6 +99,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initDb() {
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
         String id = preferences.getString("id", "");
+        String phone = preferences.getString("phone", "");
+        AVQuery<AVObject> queryId = new AVQuery<>("Client");
+        queryId.whereEqualTo("phone", phone);
+        queryId.getFirstInBackground(new GetCallback<AVObject>() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                if (e == null) {
+                    AVUser user = AVUser.getCurrentUser();
+                    user.put("id", avObject.getObjectId());
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.putString("id", avObject.getObjectId());
+                    editor.apply();
+                    user.saveInBackground();
+                }
+            }
+        });
+        if (id.isEmpty()) {
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        sleep(2000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+        }
         if (!id.isEmpty()) {
             AVQuery<AVObject> avQuery = new AVQuery<>("Client");
             avQuery.getInBackground(id, new GetCallback<AVObject>() {
@@ -104,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
+        DataSupport.deleteAll(OrderForm.class);
         final AVQuery<AVObject> query = new AVQuery<>("OrderForm");
         query.whereEqualTo("clientId", id);
         query.findInBackground(new FindCallback<AVObject>() {
@@ -123,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 orderForm.setMile(Double.parseDouble(object.get("mile").toString()));
                 orderForm.setPrice(Double.parseDouble(object.get("price").toString()));
                 orderForm.setStatus(Integer.parseInt(object.get("status").toString()));
-                orderForm.setTruck(DataSupport.where("objectId = ?", object.get("truckId").toString()).findFirst(Truck.class));
                 if (orderForm.getDriver() != null) {
                     AVQuery<AVObject> queryDriver = new AVQuery<>("Driver");
                     queryDriver.getInBackground(object.get("driverId").toString(), new GetCallback<AVObject>() {
@@ -136,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 driver.setRealName(avObject.get("realName").toString());
                                 driver.setIdNumber(avObject.get("idNumber").toString());
                                 driver.setTaskCount(Integer.parseInt(avObject.get("taskCount").toString()));
-                                driver.setRating(Integer.parseInt(avObject.get("rating").toString()));
+                                driver.setRating(Float.parseFloat(avObject.get("rating").toString()));
                                 driver.setBriefIntroduce(avObject.get("briefIntroduce").toString());
                                 driver.save();
                                 orderForm.setDriver(driver);
@@ -151,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initContentFragment() {
-        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.clear();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new OrderFragment());
         fragmentList.add(new FriendFragment());

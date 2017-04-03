@@ -37,14 +37,6 @@
                     android:textSize="18sp"
                     android:textColor="#ff5722"/>
 
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:background="@mipmap/ic_launcher" />
-
             </LinearLayout>
 
 

@@ -8,7 +8,7 @@
         android:fitsSystemWindows="true"
         android:background="#F0F0F0">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,6 @@
                 android:hint="请输入手机号"
                 android:maxLines="1"
                 android:inputType="text"
-                android:text="15968811564"
                 android:layout_gravity="center"
                 android:gravity="center_vertical">
             </EditText>
@@ -71,7 +70,6 @@
                 android:hint="请输入密码"
                 android:maxLines="1"
                 android:inputType="textPassword"
-                android:text="123456"
                 android:layout_gravity="center"
                 android:gravity="center_vertical" />
 
@@ -104,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_margin="20dp"
-            android:background="#2baf2b"
+            android:background="@drawable/shape"
             android:text="登录"
             android:textColor="@color/White"
             android:textSize="20sp"

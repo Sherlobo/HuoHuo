@@ -54,7 +54,7 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
     private String strDestination;
     private String strWeight = null;
     private String typeOfGoods = null;
-    private String strRemark;
+    private String strRemark = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,11 +227,7 @@ public class  DeliverGoodsActivity extends BaseActivity<ActivityDeliverGoodsBind
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        if (strRemark == null) {
-            strRemark = "";
-        } else {
-            strRemark = charSequence.toString();
-        }
+        strRemark = charSequence.toString();
     }
 
     @Override

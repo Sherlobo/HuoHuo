@@ -12,7 +12,7 @@ public class Driver extends Person implements Serializable {
     private int taskCount;
 
     public void setRating(float rating) {
-        if (rating > 0 && rating < 5) {
+        if (rating >= 0 && rating <= 5) {
             this.rating = rating;
         }
     }

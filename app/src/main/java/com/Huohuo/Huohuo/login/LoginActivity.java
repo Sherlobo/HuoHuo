@@ -2,7 +2,6 @@ package com.Huohuo.Huohuo.login;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -139,9 +138,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                         @Override
                         public void done(AVUser avUser, AVException e) {
                             if (e == null) {
-                                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                                editor.putString("id", avUser.get("id").toString());
-                                editor.apply();
                                 LoginActivity.this.finish();
                                 MainActivity.start(LoginActivity.this);
                             } else {

@@ -71,9 +71,21 @@ public class OrderWaitingFragment extends BaseFragment<FragmentOrderWaitingBindi
     }
 
     private void initOrder(){
-        List<OrderForm> list = DataSupport.findAll(OrderForm.class);
+        List<OrderForm> orderList = DataSupport.findAll(OrderForm.class);
+        AVQuery<AVObject> query = new AVQuery<>("OrderForm");
+        for (final OrderForm orderForm : orderList) {
+            query.getInBackground(orderForm.getObjectId(), new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    if (e == null) {
+                        orderForm.setStatus(Integer.parseInt(avObject.get("status").toString()));
+                        orderForm.save();
+                    }
+                }
+            });
+        }
         orderFormList.clear();
-        for (OrderForm orderForm : list) {
+        for (OrderForm orderForm : orderList) {
             if (orderForm.getStatus() == OrderForm.WAITING || orderForm.getStatus() == OrderForm.UNCONFIRMED) {
                 orderFormList.add(orderForm);
             }

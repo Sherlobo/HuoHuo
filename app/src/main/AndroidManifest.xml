@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     <application
         android:name=".LeanCloud"
         android:allowBackup="true"
@@ -31,23 +32,21 @@
         <service android:name="com.baidu.location.f" android:enabled="true"
             android:process=":remote">
         </service>
+        <activity android:name="com.mob.tools.MobUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme"
-            >
-
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme">
-
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -86,6 +85,9 @@
             android:name=".PersonalInfoEditActivity"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".DriverInfoActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".NavQrcodeActivity"
             android:theme="@style/AppTheme" />
@@ -160,10 +162,7 @@
         <activity
             android:name=".MsgActivity"
             android:theme="@style/AppTheme">
-        </activity>
-        <activity
-            android:name=".InsuranceActivity"
-            android:theme="@style/AppTheme">
+
         </activity>
 
     </application>

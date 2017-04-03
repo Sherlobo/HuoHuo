@@ -68,7 +68,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Driver driver = mDriverList.get(position);
         holder.realName.setText(driver.getRealName());
-        holder.ratingBar.setRating(driver.getRating());
+        holder.ratingBar.setRating(Float.parseFloat("" + driver.getRating()));
         holder.rating.setText("" + driver.getRating());
         holder.message.setText("已完成" + driver.getTaskCount() + "单");
         holder.itemView.setTag(driver);
