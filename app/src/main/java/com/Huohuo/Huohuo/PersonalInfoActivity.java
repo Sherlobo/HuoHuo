@@ -33,6 +33,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
     private TextView realName;
     private TextView briefIntroduce;
     private TextView orderCount;
+    private TextView points;
 
     private Client client;
 
@@ -81,9 +82,11 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
         realName = bindingView.realName;
         briefIntroduce = bindingView.briefIntro;
         orderCount = bindingView.orderCount;
+        points = bindingView.points;
         realName.setText(client.getRealName());
         orderCount.setText("" + client.getOrderCount());
         briefIntroduce.setText(client.getBriefIntroduce());
+        points.setText("" + client.getPoints());
     }
 
     public static void start(Context context) {

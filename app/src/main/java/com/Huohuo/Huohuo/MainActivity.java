@@ -151,9 +151,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     orderForm.setMile(Double.parseDouble(object.get("mile").toString()));
                                     orderForm.setPrice(Double.parseDouble(object.get("price").toString()));
                                     orderForm.setStatus(Integer.parseInt(object.get("status").toString()));
-                                    orderForm.setDriverId(object.get("driverId").toString());
                                     orderForm.save();
-                                    initDriver(orderForm);
+                                    if (object.get("driverId") != null) {
+                                        orderForm.setDriverId(object.get("driverId").toString());
+                                        initDriver(orderForm);
+                                    }
                                 }
                             }
                         }

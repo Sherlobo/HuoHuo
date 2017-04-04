@@ -106,8 +106,8 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
         extend = bindingView.extend;
         confirm = bindingView.confirm;
         map = bindingView.map;
-        extend.setOnClickListener(this);
         confirm.setOnClickListener(this);
+        extend.setOnClickListener(this);
         map.setOnClickListener(this);
         String weight = orderForm.getWeight();
         startTime.setText("发货时间  " + orderForm.getStartTime());
@@ -126,7 +126,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
             case OrderForm.PENDING:
                 status.setText("待接单");
                 confirm.setText("取消订单");
-                extend.setVisibility(View.GONE);
+                extend.setText("付款");
                 break;
             case OrderForm.UNDERWAY:
                 status.setText("已取货");
@@ -210,6 +210,7 @@ public class OrderInfoActivity extends BaseActivity <ActivityOrderInfoBinding> i
                 startActivity(intent);
                 break;
             case R.id.extend:
+                DeliverGoodsPayActivity.start(OrderInfoActivity.this);
                 break;
             case R.id.map:
                 MapActivity.start(OrderInfoActivity.this);
